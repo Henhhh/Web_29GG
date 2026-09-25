@@ -1,0 +1,27 @@
+.category-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 32px; }
+.category-tabs button, .filter-sidebar__toggle { padding: 8px 12px; border: 1px solid #1e1e32; background: transparent; color: #a0a0bc; font: 12px monospace; text-transform: uppercase; cursor: pointer; }
+.category-tabs button[aria-pressed="true"] { border-color: #00e5ff; color: #00e5ff; background: rgb(0 229 255 / 8%); }
+.filter-sidebar { width: 256px; flex-shrink: 0; font: 12px monospace; }
+.filter-sidebar__panel { border: 1px solid #1e1e32; background: #0a0a14; }
+.filter-sidebar__heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 14px 16px; }
+.filter-sidebar__heading h2 { margin: 0; font-size: 12px; text-transform: uppercase; color: #00e5ff; letter-spacing: 1px; }
+.filter-sidebar__heading button { border: 0; background: transparent; color: #ff668a; font: inherit; cursor: pointer; }
+.filter-sidebar__toggle { display: none; }
+.filter-group { border-top: 1px solid #1e1e32; }
+.filter-group h3 { margin: 0; }
+.filter-group h3 button { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 14px 16px; border: 0; background: transparent; color: #e8e8f0; text-transform: uppercase; font: 12px monospace; letter-spacing: 1px; cursor: pointer; }
+.filter-group h3 span { color: #00e5ff; }
+.filter-group__content { padding: 0 16px 16px; }
+.filter-option { display: flex; align-items: center; gap: 8px; min-height: 30px; color: #a0a0bc; cursor: pointer; }
+.filter-option input { width: 16px; height: 16px; margin: 0; accent-color: #00e5ff; flex-shrink: 0; }
+.price-filter__hint { color: #a0a0bc; font-size: 10px; margin-top: 16px; }
+.price-filter__inputs { display: flex; gap: 8px; }
+.price-filter__inputs input { width: 50%; min-width: 0; padding: 8px; border: 1px solid #34344e; background: #0f0f1a; color: #e8e8f0; font: inherit; }
+.price-filter__error { color: #ff889f; line-height: 1.5; }
+.filter-sidebar :focus-visible, .category-tabs :focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; }
+@media (max-width: 760px) {
+  .filter-sidebar { width: 100%; }
+  .filter-sidebar__toggle { display: block; margin-bottom: 12px; }
+  .filter-sidebar__panel { display: none; }
+  .filter-sidebar__panel--open { display: block; }
+}
