@@ -1,0 +1,7 @@
+import type { ShopProduct } from '../models/shopProduct'
+import { money } from '../../cart/models/cartModel'
+import './products.css'
+type Props = { product: ShopProduct; onAdd: (product: ShopProduct) => void; quantity: number }
+export default function ProductCard({ product, onAdd, quantity }: Props) {
+  return <article className="product-card"><div className="product-card__image"><img loading="lazy" src={product.image} alt={product.name} />{product.badge && <span className={`product-card__badge${product.badge === 'NEW' ? ' product-card__badge--new' : ''}`}>{product.badge}</span>}</div><div className="product-card__body"><span className="product-card__category">{product.category}</span><h3>{product.name}</h3><ul>{product.specs.map((spec, index) => <li key={`${index}-${spec}`}>{spec}</li>)}</ul><div className="product-card__price"><div><strong>{money(product.price)}</strong>{product.originalPrice && <del>{money(product.originalPrice)}</del>}</div><button className="shop-button shop-button--outline" type="button" disabled={product.stock !== null && quantity >= product.stock} onClick={() => onAdd(product)}>{product.stock !== null && quantity >= product.stock ? 'Stock limit' : '+ Cart'}</button></div><p className={product.stock !== null && product.stock < 15 ? 'product-card__stock product-card__stock--low' : 'product-card__stock'}>{product.stock === null ? 'Stock not provided' : product.stock < 15 ? `Only ${product.stock} left` : `${product.stock} in stock`}</p></div></article>
+}
