@@ -1,10 +1,11 @@
-export const categories = ['All', 'Mouse', 'Keyboards', 'Headphones', 'Monitors', 'Microphones', 'Mouse Pads']
+export const categories = ['All', 'Mouse', 'Keyboards', 'Headphones', 'Monitors', 'Microphones', 'Pads']
 export const priceRanges = [
-  { label: '$0 – $50', min: 0, max: 50 },
-  { label: '$50 – $100', min: 50, max: 100 },
-  { label: '$100 – $200', min: 100, max: 200 },
-  { label: '$200 – $500', min: 200, max: 500 },
-  { label: '$500+', min: 500, max: Infinity },
+  { label: 'Under 500.000 ₫', min: 0, max: 500000 },
+  { label: '500.000 – under 1.000.000 ₫', min: 500000, max: 1000000 },
+  { label: '1.000.000 – under 2.000.000 ₫', min: 1000000, max: 2000000 },
+  { label: '2.000.000 – under 5.000.000 ₫', min: 2000000, max: 5000000 },
+  { label: '5.000.000 – under 10.000.000 ₫', min: 5000000, max: 10000000 },
+  { label: '10.000.000 ₫ and above', min: 10000000, max: Infinity },
 ]
 
 export type Filters = {
@@ -35,15 +36,15 @@ export type FilterableProduct = {
 export function priceError(filters: Filters) {
   const { minPrice, maxPrice } = filters
   if ([minPrice, maxPrice].some(value => value !== '' && (!Number.isFinite(Number(value)) || Number(value) < 0))) {
-    return 'Giá phải là số không âm.'
+    return 'Price must be a non-negative number.'
   }
   if (minPrice !== '' && maxPrice !== '' && Number(minPrice) > Number(maxPrice)) {
-    return 'Giá thấp nhất không được lớn hơn giá cao nhất.'
+    return 'Minimum price must not exceed maximum price.'
   }
   return ''
 }
 
-// OR trong cùng nhóm, AND giữa các nhóm. Khoảng giá: min <= giá < max.
+// OR trong cùng nhóm, AND giữa các nhóm. Price range: min <= giá < max.
 // Giá tự nhập bao gồm cả hai đầu mút.
 export function matchesFilters(product: FilterableProduct, search: string, category: string, filters: Filters) {
   if (priceError(filters)) return false

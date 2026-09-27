@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Outfit:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root { color-scheme: dark; --shop-cyan: #00e5ff; --shop-muted: #9393b7; }
+html { scroll-behavior: smooth; }
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #05070f;
-  color: #ffffff;
+  font-family: 'Outfit', Arial, sans-serif;
+  background: #08080f;
+  color: #e8e8f0;
 }
 
 a {
@@ -18,3 +22,10 @@ button,
 input {
   font-family: inherit;
 }
+
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+button:focus-visible, a:focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; }
+::selection { background: rgb(0 229 255 / 25%); }
+@media(prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }

@@ -259,12 +259,24 @@
   font-size: 11px;
 }
 
+.account-menu__profile { margin: 12px 0; font-size: 13px; }
+.account-menu__profile dt { color: #a0a0bc; margin-top: 12px; font-size: 11px; }
+.account-menu__profile dd { margin: 4px 0 0; overflow-wrap: anywhere; }
+.account-menu__popover .account-menu__edit { color: #00e5ff; border-color: #23606b; margin-bottom: 8px; }
+.account-profile { padding: 24px; max-width: 520px; margin: auto; }
+.account-profile label { display: block; margin: 18px 0 8px; color: #a0a0bc; }
+.account-profile input { display: block; width: 100%; padding: 12px; border: 1px solid #34344e; background: #12121f; color: #e8e8f0; }
+.account-profile input:focus-visible { outline: 2px solid #00e5ff; }
+.account-profile p { color: #a0a0bc; line-height: 1.6; overflow-wrap: anywhere; }
+.account-profile .checkout-error { color: #ff8ca9; }
 .account-menu__popover {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   z-index: 20;
   width: min(280px, calc(100vw - 32px));
+  max-height: calc(100dvh - 150px);
+  overflow-y: auto;
   padding: 16px;
   border: 1px solid #29293d;
   background: #0f0f1a;

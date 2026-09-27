@@ -1,0 +1,19 @@
+.shop-hero { position: relative; min-height: 560px; background: linear-gradient(to right,#08080f 20%,rgb(8 8 15 / 65%) 75%,#08080f),linear-gradient(to top,#08080f,transparent),url('https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=1600&h=600&fit=crop&auto=format') center/cover; }
+.shop-hero::before { content: ''; position: absolute; top: 30%; left: 0; right: 0; height: 1px; background: rgb(0 229 255 / 15%); }
+.shop-hero__inner { min-height: 560px; display: flex; align-items: center; position: relative; }
+.shop-hero__content { padding-block: 60px; }
+.shop-hero h1 { margin: 24px 0 16px; font: 900 clamp(52px,8vw,96px)/1 'Barlow Condensed',Impact,sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+.shop-hero h1 span { color: #00e5ff; text-shadow: 0 0 30px rgb(0 229 255 / 45%); }
+.shop-hero__description { color: #9393b7; font-size: 18px; line-height: 1.6; max-width: 540px; }
+.shop-hero__actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.shop-hero__support { display: flex; flex-direction: column; margin-top: 40px; }
+.shop-hero__support strong { color: #00e5ff; font: 900 26px 'Barlow Condensed',sans-serif; }
+.shop-hero__support span { color: #9393b7; font: 11px 'JetBrains Mono',monospace; text-transform: uppercase; letter-spacing: 2px; }
+.shop-promo { position: relative; display: flex; justify-content: space-between; gap: 20px; padding: 28px 40px 38px; background: linear-gradient(120deg,#0a0a14,#1a0a2e,#0d1a3a); border: 1px solid #29293d; border-radius: 12px; margin-top: 24px; overflow: hidden; }
+.shop-promo h2 { margin: 8px 0; color: #00e5ff; font: 900 40px 'Barlow Condensed',sans-serif; }
+.shop-promo p { margin: 8px 0 14px; }
+.shop-promo img { width: 260px; object-fit: cover; transform: rotate(4deg); }
+.shop-promo__controls { position: absolute; bottom: 10px; left: 50%; display: flex; gap: 8px; }
+.shop-promo__controls button { border: 1px solid #404058; background: transparent; color: #a0a0bc; font-size: 10px; }
+.shop-promo__controls button[aria-pressed=true] { background: #00e5ff; color: #08080f; }
+@media(max-width:650px) { .shop-promo { padding: 24px 20px 40px; } .shop-promo img { display: none; } .shop-hero__inner, .shop-hero { min-height: 500px; } }

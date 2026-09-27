@@ -1,0 +1,4 @@
+import './home.css'
+export default function HeroSection({ onRegister, signedIn }: { onRegister: () => void; signedIn: boolean }) {
+  return <section className="shop-hero" aria-labelledby="hero-title"><div className="shop-container shop-hero__inner"><div className="shop-hero__content"><p className="shop-eyebrow shop-eyebrow--red">Pro esports equipment</p><h1 id="hero-title">Dominate<br /><span>Every game</span></h1><p className="shop-hero__description">Tournament-grade gear built for players who refuse to lose.<br />Shop mice, keyboards, headphones, and more.</p><div className="shop-hero__actions"><a className="shop-button" href="#products">Shop now</a>{!signedIn && <button className="shop-button shop-button--outline" type="button" onClick={onRegister}>Create account →</button>}</div><div className="shop-hero__support"><strong>24/7</strong><span>Support</span></div></div></div></section>
+}

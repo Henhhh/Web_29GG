@@ -2,7 +2,11 @@ export type AuthUser = {
   id?: string
   username: string
   email: string
+  fullName?: string
+  phone?: string
 }
+
+export type AccountProfile = { fullName: string; phone: string }
 
 export type LoginCredentials = {
   email: string

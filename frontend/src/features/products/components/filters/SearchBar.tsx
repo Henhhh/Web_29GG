@@ -15,7 +15,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
   }
 
   return (
-    <div className="product-search" role="search" aria-label="Tìm kiếm sản phẩm">
+    <div className="product-search" role="search" aria-label="Product search">
       <svg className="product-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <circle cx="10.5" cy="10.5" r="6.5" />
         <path d="m16 16 4 4" />
@@ -24,13 +24,13 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
         ref={inputRef}
         className="product-search__input"
         type="search"
-        aria-label="Tìm theo tên hoặc thông số sản phẩm"
+        aria-label="Search by product name or specifications"
         placeholder="Search products, specs..."
         value={value}
         onChange={(event) => onChange(event.target.value)}
       />
       {value && (
-        <button className="product-search__clear" type="button" aria-label="Xóa từ khóa tìm kiếm" onClick={clearSearch}>
+        <button className="product-search__clear" type="button" aria-label="Clear search" onClick={clearSearch}>
           <span aria-hidden="true">×</span>
         </button>
       )}
