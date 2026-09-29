@@ -1,23 +1,34 @@
+/* Shop Header (Logo, Nav Container, Cart, Login/Register) */
 .shop-header { position: sticky; top: 0; z-index: 40; background: rgb(8 8 15 / 94%); backdrop-filter: blur(12px); border-bottom: 1px solid #1e1e32; }
 .shop-header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 20px; }
+
 .shop-logo { display: inline-flex; align-items: center; gap: 8px; font: 900 24px 'Barlow Condensed', sans-serif; letter-spacing: 1px; flex-shrink: 0; }
 .shop-logo span { color: #00e5ff; }
 .shop-logo .shop-logo__mark { display: grid; place-items: center; width: 32px; height: 32px; background: #00e5ff; color: #08080f; font-size: 16px; clip-path: polygon(0 0,100% 0,100% 75%,75% 100%,0 100%); }
+
 .shop-nav { display: flex; gap: 22px; }
 .shop-nav button, .shop-footer nav button { border: 0; background: transparent; padding: 8px 0; color: #9393b7; font: 11px 'JetBrains Mono', monospace; letter-spacing: 1px; }
 .shop-nav button:hover, .shop-nav button[aria-pressed=true], .shop-footer nav button:hover { color: #00e5ff; }
+
 .shop-header__actions { display: flex; align-items: center; justify-content: center; gap: 8px; }
+
 .shop-cart-trigger { position: relative; border: 1px solid #29293d; background: transparent; color: #e8e8f0; padding: 10px 14px; }
 .shop-cart-trigger span { position: absolute; top: -7px; right: -5px; background: #ff003c; color: white; padding: 1px 4px; font: bold 11px monospace; }
+
+/* Shop Benefits */
 .shop-benefits { padding: 56px 0; border-block: 1px solid #1e1e32; background: #0f0f1a; }
 .shop-benefits > div { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 36px; }
 .shop-benefits article { display: flex; align-items: flex-start; gap: 16px; }
 .shop-benefits article > span { padding: 10px; border: 1px solid #164652; background: #0c202a; }
 .shop-benefits h3 { margin: 0 0 8px; font: 700 20px 'Barlow Condensed', sans-serif; text-transform: uppercase; }
 .shop-benefits p { margin: 0; color: #9393b7; font-size: 14px; line-height: 1.6; }
+
+/* Shop Footer */
 .shop-footer { padding: 48px 0; }
 .shop-footer__inner { display: flex; justify-content: space-between; align-items: center; gap: 28px; }
 .shop-footer p { color: #9393b7; font: 11px 'JetBrains Mono', monospace; }
 .shop-footer nav { display: flex; flex-wrap: wrap; gap: 24px; text-transform: uppercase; }
+
+/* Responsive Destop & Mobile */
 @media(max-width:1100px) { .shop-header__inner { flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; gap: 12px; } .shop-nav { order: 3; width: 100%; overflow-x: auto; padding-bottom: 3px; } .shop-nav button { white-space: nowrap; } }
 @media(max-width:700px) { .shop-benefits > div { grid-template-columns: 1fr; } .shop-footer__inner { align-items: flex-start; flex-direction: column; } .shop-header .shop-button { padding: 9px; font-size: 10px; } .shop-logo { font-size: 20px; } .shop-cart-trigger { padding: 8px; } }

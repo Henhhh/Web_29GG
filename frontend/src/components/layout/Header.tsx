@@ -2,7 +2,7 @@ import type { AuthUser, AuthView, AccountProfile } from '../../features/auth/aut
 import AccountMenu from '../../features/auth/components/AccountMenu'
 import { categories } from '../../features/products/components/filters/filterModel'
 import './layout.css'
-type Props = { user: AuthUser | null; count: number; category: string; onCategory: (category: string) => void; onAuth: (view: AuthView) => void; onCart: () => void; onLogout: () => void; onProfileSave: (profile: AccountProfile) => void }
+type Props = { user: AuthUser | null; count: number; category: string; onCategory: (category: string) => void; onAuth: (view: AuthView) => void; onCart: () => void; onLogout: () => void; onProfileSave: (profile: AccountProfile) => Promise<void> }
 export default function Header({ user, count, category, onCategory, onAuth, onCart, onLogout, onProfileSave }: Props) {
   return <header className="shop-header"><div className="shop-container shop-header__inner">
     <a className="shop-logo" href="#top" aria-label="29GG home"><span className="shop-logo__mark">29</span><b>29<span>GG</span></b></a>
