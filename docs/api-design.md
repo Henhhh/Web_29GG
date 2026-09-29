@@ -72,3 +72,11 @@ Các URL dưới đây đều có tiền tố `/api`.
 - Đăng ký trùng email bị từ chối dù password giống hay khác; nếu trùng cả email và username, ưu tiên lỗi email.
 - Dùng pytest + Flask test_client: kiểm tra thành công, lỗi trong bảng, token hết hạn, truy cập dữ liệu người khác và thiếu kho; mỗi test dùng database riêng.
 - SQL dùng tham số `?`; chỉ nhận các trường cho phép. Secret từ biến môi trường, không hardcode. Chạy test trên push/PR; production dùng HTTPS và tắt debug.
+
+## Auth implementation notes
+
+JWT TTL: 7200 seconds (2 hours). Frontend keeps the token in memory only; reload requires login.
+Password length: 6-128 characters. Username: 1-80 characters.
+Login limit: 10 valid-format attempts per email and client IP per 15 minutes, stored in SQLite login_limits.
+Implemented: /api/auth/register, /api/auth/login, GET/PATCH /api/me, GET /api/health.
+Other endpoints in this document remain planned. See backend/README.md for setup.

@@ -4,10 +4,11 @@ import './auth.css'
 
 type RegisterFormProps = {
   error?: string
+  details?: Record<string, string>
   onSubmit: (credentials: RegisterCredentials) => Promise<void> | void
 }
 
-export default function RegisterForm({ error, onSubmit }: RegisterFormProps) {
+export default function RegisterForm({ error, details = {}, onSubmit }: RegisterFormProps) {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -61,6 +62,7 @@ export default function RegisterForm({ error, onSubmit }: RegisterFormProps) {
     <form className="auth-form" onSubmit={handleSubmit} noValidate>
       <div className="auth-field">
         <label htmlFor="register-username">Username</label>
+        {details.username && <p className="auth-form__error" role="alert">{details.username}</p>}
         <input
           id="register-username"
           type="text"
@@ -75,6 +77,7 @@ export default function RegisterForm({ error, onSubmit }: RegisterFormProps) {
 
       <div className="auth-field">
         <label htmlFor="register-email">Email</label>
+        {details.email && <p className="auth-form__error" role="alert">{details.email}</p>}
         <input
           id="register-email"
           type="email"
@@ -88,6 +91,7 @@ export default function RegisterForm({ error, onSubmit }: RegisterFormProps) {
 
       <div className="auth-field">
         <label htmlFor="register-password">Password</label>
+        {details.password && <p className="auth-form__error" role="alert">{details.password}</p>}
         <input
           id="register-password"
           type="password"

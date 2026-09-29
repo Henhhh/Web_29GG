@@ -4,10 +4,11 @@ import './auth.css'
 
 type LoginFormProps = {
   error?: string
+  details?: Record<string, string>
   onSubmit: (credentials: LoginCredentials) => Promise<void> | void
 }
 
-export default function LoginForm({ error, onSubmit }: LoginFormProps) {
+export default function LoginForm({ error, details = {}, onSubmit }: LoginFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -48,6 +49,7 @@ export default function LoginForm({ error, onSubmit }: LoginFormProps) {
     <form className="auth-form" onSubmit={handleSubmit} noValidate>
       <div className="auth-field">
         <label htmlFor="login-email">Email</label>
+        {details.email && <p className="auth-form__error" role="alert">{details.email}</p>}
         <input
           id="login-email"
           type="email"
@@ -62,6 +64,7 @@ export default function LoginForm({ error, onSubmit }: LoginFormProps) {
 
       <div className="auth-field">
         <label htmlFor="login-password">Password</label>
+        {details.password && <p className="auth-form__error" role="alert">{details.password}</p>}
         <div className="auth-password">
           <input
             id="login-password"

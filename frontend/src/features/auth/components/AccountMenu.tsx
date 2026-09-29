@@ -7,7 +7,7 @@ import './auth.css'
 type AccountMenuProps = {
   user: AuthUser
   onLogout: () => void
-  onProfileSave: (profile: AccountProfile) => void
+  onProfileSave: (profile: AccountProfile) => Promise<void>
 }
 
 export default function AccountMenu({ user, onLogout, onProfileSave }: AccountMenuProps) {
@@ -66,7 +66,7 @@ export default function AccountMenu({ user, onLogout, onProfileSave }: AccountMe
           </button>
         </div>
       )}
-      {editing && <Overlay title="Personal information" onClose={() => setEditing(false)}><ProfileForm user={user} onSave={profile => { onProfileSave(profile); setEditing(false); setIsOpen(true) }} /></Overlay>}
+      {editing && <Overlay title="Personal information" onClose={() => setEditing(false)}><ProfileForm user={user} onSave={async profile => { await onProfileSave(profile); setEditing(false); setIsOpen(true) }} /></Overlay>}
     </div>
   )
 }

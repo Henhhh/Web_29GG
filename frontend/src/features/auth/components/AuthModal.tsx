@@ -8,6 +8,7 @@ type AuthModalProps = {
   isOpen: boolean
   view: AuthView
   error?: string
+  details?: Record<string, string>
   onClose: () => void
   onViewChange: (view: AuthView) => void
   onLogin: (credentials: LoginCredentials) => Promise<void> | void
@@ -18,6 +19,7 @@ export default function AuthModal({
   isOpen,
   view,
   error,
+  details,
   onClose,
   onViewChange,
   onLogin,
@@ -94,9 +96,9 @@ export default function AuthModal({
         </div>
 
         {view === 'login' ? (
-          <LoginForm error={error} onSubmit={onLogin} />
+          <LoginForm details={details} error={error} onSubmit={onLogin} />
         ) : (
-          <RegisterForm error={error} onSubmit={onRegister} />
+          <RegisterForm details={details} error={error} onSubmit={onRegister} />
         )}
       </section>
     </div>
