@@ -6,7 +6,8 @@
 - Brand chuẩn hóa từ tiền tố tên sản phẩm (ASUS → Asus, AKKO → Akko); ATK VXE thuộc ATK.
 - Ảnh gốc giữ tại `design/product`, bản phục vụ web tại `frontend/public/products`.
 - Đã có ảnh GIGABYTE GO27Q24. AKKO 5098B Santorini V3 dùng ảnh có hậu tố Piano Pro do người dùng cung cấp.
-- Excel không có tồn kho: theo yêu cầu, frontend đặt tồn kho mẫu từ 10 đến 50 cho mỗi sản phẩm. API phải thay bằng tồn kho thực khi tích hợp.
+- Excel không có tồn kho: seed backend dùng tồn kho mẫu từ 10 đến 50 và API catalog trả giá trị đó. Đây chưa phải số liệu tồn kho production.
+- Giao diện catalog lấy danh mục, hãng, giá và tồn kho từ backend; file catalog frontend được giữ làm nguồn dữ liệu tham khảo/import.
 - Pads có 3 thông số trong Excel; không thêm thông số thứ tư không có nguồn.
 - Thông số được giữ theo Excel, chưa đối chiếu thông số kỹ thuật của nhà sản xuất.
 

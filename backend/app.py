@@ -29,8 +29,10 @@ def create_app(test_config=None):
     app.config["DB_FILE"] = str(path)
     app.config["DUMMY_PASSWORD_HASH"] = generate_password_hash("not-a-real-account-password")
     init_app(app)
-    from routes.auth import bp
-    app.register_blueprint(bp)
+    from routes.auth import bp as auth_bp
+    from routes.products import bp as products_bp
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(products_bp)
 
     @app.get("/api/health")
     def health():
