@@ -189,3 +189,34 @@ def test_concurrent_checkout_never_oversells_or_duplicates(shop,monkeypatch,same
             assert db.execute(f'SELECT count(*) FROM {table}').fetchone()[0]==1
         assert db.execute('SELECT count(*) FROM cart_items').fetchone()[0]==(0 if same_user else 1)
         assert db.execute('PRAGMA foreign_key_check').fetchall()==[]
+
+
+@pytest.mark.parametrize('query', ['page=0','page=-1','page=abc','page=1.5','page=%C2%B2','page='+'9'*30,'page_size=0','page_size=101','page_size=abc'])
+def test_history_invalid_pagination(shop, query):
+    app,h=shop
+    response=app.test_client().get('/api/orders?'+query,headers=h[1])
+    assert response.status_code==422
+    assert response.json['error']['code']=='validation_failed'
+
+
+def test_history_pages_and_detail_match_saved_order(shop):
+    app,h=shop
+    client=app.test_client()
+    ids=[]
+    for _ in range(3):
+        add(app,h[1])
+        response=client.post('/api/orders',headers=h[1],json=body())
+        assert response.status_code==201
+        ids.append(response.json['data']['id'])
+    first=client.get('/api/orders?page=1&page_size=2',headers=h[1]).json['data']
+    second=client.get('/api/orders?page=2&page_size=2',headers=h[1]).json['data']
+    assert first['total']==second['total']==3
+    assert [item['id'] for item in first['items']+second['items']]==list(reversed(ids))
+    assert all(item['item_count']==1 for item in first['items'])
+    assert client.get('/api/orders?page=3&page_size=2',headers=h[1]).json['data']['items']==[]
+    assert client.get('/api/orders',headers=h[2]).json['data']['items']==[]
+    assert client.get('/api/orders/999999',headers=h[1]).status_code==404
+    for oid in ids:
+        detail=client.get(f'/api/orders/{oid}',headers=h[1]).json['data']
+        assert detail['total']==sum(item['line_total'] for item in detail['items'])+detail['shipping_fee']
+        assert client.get(f'/api/orders/{oid}',headers=h[2]).status_code==404
