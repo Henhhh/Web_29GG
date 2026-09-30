@@ -19,11 +19,3 @@ export type RegisterCredentials = LoginCredentials & {
 }
 
 export type AuthView = 'login' | 'register'
-
-export class AuthApiError extends Error {
-  details: Record<string, string>
-  constructor(message: string, details: Record<string, string> = {}) {
-    super(message)
-    this.details = details
-  }
-}

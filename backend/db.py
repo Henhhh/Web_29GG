@@ -25,4 +25,16 @@ def init_app(app):
     @app.cli.command("init-db")
     def command():
         init_db()
-        click.echo("Auth tables initialized; existing rows preserved.")
+        click.echo("Tables initialized; existing rows preserved.")
+    @app.cli.command("seed-products")
+    def seed_products_command():
+        from seed import seed_products
+        init_db()
+        result = seed_products()
+        click.echo(f"Products: {result['inserted']} inserted, {result['skipped']} existing rows preserved.")
+    @app.cli.command("seed-pickup")
+    def seed_pickup_command():
+        from seed import seed_pickup
+        init_db()
+        result = seed_pickup()
+        click.echo(f"Pickup: {result['inserted']} inserted, {result['skipped']} existing rows preserved.")

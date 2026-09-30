@@ -1,7 +1,7 @@
 # 29GG Auth backend
 
 Implemented: Flask + sqlite3, registration, JWT login, GET/PATCH /api/me.
-Products/cart/orders routes and seed.py remain placeholders. This step creates only users and login_limits, not the complete commerce schema.
+Product and cart/order/payment/pickup schemas are implemented, with product and pickup seeds. Products/cart/orders API routes remain placeholders.
 
 ## Run on Windows PowerShell
 
@@ -64,7 +64,7 @@ are not trusted automatically. Rate limiting currently covers login, not registr
 ## Ownership
 
 - app.py: application factory/config and route registration.
-- db.py/schema.sql: shared SQLite connection and Auth tables.
+- db.py/schema.sql: shared SQLite connection and Auth, catalog, cart, order, payment and pickup tables.
 - auth.py: shared JWT helper/decorator; routes use g.user after @require_user.
 - validation.py: shared errors and Auth/profile input checks.
 - routes/auth.py: register, login, profile endpoints.
@@ -78,3 +78,41 @@ No SQLAlchemy or Flask-Login dependency is used. Keep .env, .venv and database f
 - Flask application factory: https://flask.palletsprojects.com/en/stable/tutorial/factory/
 - Flask test client: https://flask.palletsprojects.com/en/stable/testing/
 - PyJWT verification: https://pyjwt.readthedocs.io/en/latest/api.html
+
+## Team integration
+
+All private blueprints reuse auth.require_user and flask.g.user; use db.get_db for the shared SQLite connection.
+
+## Seed products
+
+From repository root, after installing dependencies and configuring .env:
+
+```powershell
+backend/.venv/Scripts/python.exe -m flask --app backend/app.py seed-products
+```
+
+Creates missing tables and seeds 60 products / 6 categories, brands and connections.
+Source: backend/data/products.json, a snapshot of the current frontend catalog.
+No Node runtime is required for seeding. Keep the snapshot synchronized intentionally when changing seed data.
+Existing product IDs are skipped entirely: stock, prices, metadata and connections are preserved.
+This is not a catalog update/migration command. All inserts run in one transaction.
+Invalid source data is rejected before writes. Existing Auth accounts remain intact.
+Pickup stores have a separate seed command below.
+
+## Seed pickup stores
+
+```powershell
+backend/.venv/Scripts/python.exe -m flask --app backend/app.py seed-pickup
+```
+
+Creates missing tables and inserts the four stores in backend/data/pickup_stores.json.
+Existing IDs are skipped, preserving edited addresses and inactive stores. Inserts are atomic.
+This command does not seed users, carts, orders or payments, or change existing products.
+init-db creates missing tables; changing constraints on an existing table needs a separate migration.
+
+Database constraints enforce positive quantities, integer VND amounts, delivery address branches,
+unique cart/order items and one payment per order. History foreign keys restrict deletion.
+The future checkout API must validate stock and active stores, compute totals from products,
+ensure payment amount equals order total, and write the order/stock/cart changes in one transaction.
+Boolean input rejection, address relationships and email/phone validation belong to the API.
+No payment verification or stock deduction is implemented by this schema/seed step.

@@ -1,0 +1,1097 @@
+[
+  {
+    "id": 101,
+    "name": "Logitech G102 Lightsync",
+    "category": "mouse",
+    "brand": "Logitech",
+    "price": 399000,
+    "image": "/products/Mouse/Logitech%20G102%20LightSync.jpg",
+    "specs": [
+      "Connection type: Wired",
+      "DPI (max): 8000",
+      "Weight (g): 85",
+      "Dimensions (mm): 116.6 x 62.15 x 38.2"
+    ],
+    "stock": 20,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 102,
+    "name": "Logitech G403 Hyperion Fury",
+    "category": "mouse",
+    "brand": "Logitech",
+    "price": 699000,
+    "image": "/products/Mouse/Logitech%20G403%20Hyperion%20Fury.webp",
+    "specs": [
+      "Connection type: Wired",
+      "DPI (max): 16000",
+      "Weight (g): 108",
+      "Dimensions (mm): 124 x 68 x 43"
+    ],
+    "stock": 27,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 103,
+    "name": "ATK VXE V3 Pro Wireless",
+    "category": "mouse",
+    "brand": "ATK",
+    "price": 519480,
+    "image": "/products/Mouse/ATK%20VXE%20V3%20Pro%20Wireless.jpg",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "DPI (max): 18000",
+      "Weight (g): 49",
+      "Dimensions (mm): 116.6 x 62.15 x 38.2"
+    ],
+    "stock": 34,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 104,
+    "name": "ATK VXE Dragonfly R1 Pro Max",
+    "category": "mouse",
+    "brand": "ATK",
+    "price": 1050000,
+    "image": "/products/Mouse/ATK%20VXE%20Dragonfly%20R1%20Pro%20Max.webp",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "DPI (max): 26000",
+      "Weight (g): 54",
+      "Dimensions (mm): 120.6 x 64.0 x 37.8"
+    ],
+    "stock": 41,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 105,
+    "name": "Asus TUF Gaming M3 Gen II",
+    "category": "mouse",
+    "brand": "Asus",
+    "price": 450000,
+    "image": "/products/Mouse/Asus%20TUF%20Gaming%20M3%20Gen%20II.webp",
+    "specs": [
+      "Connection type: Wired",
+      "DPI (max): 8000",
+      "Weight (g): 59",
+      "Dimensions (mm): 123 x 68 x 40"
+    ],
+    "stock": 48,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 106,
+    "name": "ASUS P722 ROG KERIS II Origin WL White",
+    "category": "mouse",
+    "brand": "Asus",
+    "price": 3290000,
+    "image": "/products/Mouse/ASUS%20P722%20ROG%20KERIS%20II%20Origin%20WL%20White.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "DPI (max): 42000",
+      "Weight (g): 65",
+      "Dimensions (mm): 121 x 67 x 42"
+    ],
+    "stock": 14,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 107,
+    "name": "Razer DeathAdder V4 Pro - NiKo Edition",
+    "category": "mouse",
+    "brand": "Razer",
+    "price": 5190000,
+    "image": "/products/Mouse/Razer%20DeathAdder%20V4%20Pro%20-%20NiKo%20Edition.webp",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "DPI (max): 45000",
+      "Weight (g): 57",
+      "Dimensions (mm): 128 x 68 x 44"
+    ],
+    "stock": 21,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 108,
+    "name": "Razer Viper V3 Pro SE",
+    "category": "mouse",
+    "brand": "Razer",
+    "price": 2370000,
+    "image": "/products/Mouse/Razer%20Viper%20V3%20Pro%20SE.jpg",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "DPI (max): 35000",
+      "Weight (g): 54",
+      "Dimensions (mm): 127.1 x 63.9 x 39.9"
+    ],
+    "stock": 28,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 109,
+    "name": "Pulsar X2 v3 PRX Edition",
+    "category": "mouse",
+    "brand": "Pulsar",
+    "price": 3650000,
+    "image": "/products/Mouse/Pulsar%20X2%20v3%20PRX%20Edition.webp",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "DPI (max): 32000",
+      "Weight (g): 52",
+      "Dimensions (mm): 120.4 x 63.0 x 38.0"
+    ],
+    "stock": 35,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 110,
+    "name": "Pulsar X2 Wireless",
+    "category": "mouse",
+    "brand": "Pulsar",
+    "price": 1790000,
+    "image": "/products/Mouse/Pulsar%20X2%20Wireless.webp",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "DPI (max): 26000",
+      "Weight (g): 56",
+      "Dimensions (mm): 120 x 63 x 38"
+    ],
+    "stock": 42,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 201,
+    "name": "ASUS ROG Falchion Ace 75 HE V2X White",
+    "category": "keyboard",
+    "brand": "Asus",
+    "price": 5890000,
+    "image": "/products/Keyboards/ASUS%20ROG%20Falchion%20Ace%2075%20HE%20V2X%20White.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Switch: ROG HFX V2 Magnetic",
+      "Features: Rapid Trigger",
+      "RGB: ASUS Aura Sync"
+    ],
+    "stock": 23,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 202,
+    "name": "ASUS ROG Azoth 96 HE White",
+    "category": "keyboard",
+    "brand": "Asus",
+    "price": 9590000,
+    "image": "/products/Keyboards/ASUS%20ROG%20Azoth%2096%20HE%20White.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: ROG HFX V2 Magnetic",
+      "Features: Rapid Trigger",
+      "RGB: ASUS Aura Sync"
+    ],
+    "stock": 30,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 203,
+    "name": "AKKO 5098B Santorini V3",
+    "category": "keyboard",
+    "brand": "Akko",
+    "price": 2090000,
+    "image": "/products/Keyboards/AKKO%205098B%20Santorini%20V3%20Piano%20Pro.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: Piano Pro",
+      "Features: Gasket Mount",
+      "RGB: South-Facing"
+    ],
+    "stock": 37,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 204,
+    "name": "AKKO 5075B Plus Red World Tour VIET NAM",
+    "category": "keyboard",
+    "brand": "Akko",
+    "price": 1490000,
+    "image": "/products/Keyboards/AKKO%205075B%20Plus%20Red%20World%20Tour%20VIET%20NAM.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: Cream Yellow & Blue Pro",
+      "Features: Gasket Mount",
+      "RGB: South-Facing"
+    ],
+    "stock": 44,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 205,
+    "name": "DareU EK75 PRO Cloudy",
+    "category": "keyboard",
+    "brand": "DareU",
+    "price": 750000,
+    "image": "/products/Keyboards/DareU%20EK75%20PRO%20Cloudy.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: Aqua Dream",
+      "Features: Gasket Mount",
+      "RGB: South-Facing"
+    ],
+    "stock": 10,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 206,
+    "name": "DareU Flex 75 Shadowfold",
+    "category": "keyboard",
+    "brand": "DareU",
+    "price": 729000,
+    "image": "/products/Keyboards/DareU%20Flex%2075%20Shadowfold.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: Pegasus",
+      "Features: Gasket Mount",
+      "RGB: South-Facing"
+    ],
+    "stock": 17,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 207,
+    "name": "AULA F108 Pro",
+    "category": "keyboard",
+    "brand": "AULA",
+    "price": 1690000,
+    "image": "/products/Keyboards/AULA%20F108%20Pro.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: LEOBOG Reaper / Nimbus V3 / Seascape",
+      "Features: Gasket Mount",
+      "RGB: South-Facing"
+    ],
+    "stock": 24,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 208,
+    "name": "AULA F75",
+    "category": "keyboard",
+    "brand": "AULA",
+    "price": 1599000,
+    "image": "/products/Keyboards/AULA%20F75.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless USB 2.4GHz & Bluetooth & Wired)",
+      "Switch: LEOBOG Reaper / Ice Vein / TTC Crescent",
+      "Features: Gasket Mount",
+      "RGB: South-Facing"
+    ],
+    "stock": 31,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 209,
+    "name": "Logitech G512 GX RGB Tactile",
+    "category": "keyboard",
+    "brand": "Logitech",
+    "price": 2150000,
+    "image": "/products/Keyboards/Logitech%20G512%20GX%20RGB%20Tactile.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Switch: GX Brown",
+      "Features: Rapid Trigger",
+      "RGB: LIGHTSYNC RGB"
+    ],
+    "stock": 38,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 210,
+    "name": "Logitech G512 X 98 TMR 8K Black",
+    "category": "keyboard",
+    "brand": "Logitech",
+    "price": 5390000,
+    "image": "/products/Keyboards/Logitech%20G512%20X%2098%20TMR%208K%20Black.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Switch: GX Brown",
+      "Features: Rapid Trigger",
+      "RGB: LIGHTSYNC RGB"
+    ],
+    "stock": 45,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 301,
+    "name": "LG UltraGear HDR10",
+    "category": "monitor",
+    "brand": "LG",
+    "price": 2650000,
+    "image": "/products/Monitor/LG%20UltraGear%20HDR10.webp",
+    "specs": [
+      "Resolution: Full HD (1920 x 1080)",
+      "Refresh rate (Hz): 144",
+      "Screen size (inch): 23.8",
+      "Response time (ms): 1"
+    ],
+    "stock": 26,
+    "connections": [],
+    "size": "23.8\"",
+    "refreshRate": "144Hz"
+  },
+  {
+    "id": 302,
+    "name": "LG UltraGear Oled 45GX950A",
+    "category": "monitor",
+    "brand": "LG",
+    "price": 52990000,
+    "image": "/products/Monitor/LG%20UltraGear%20Oled%2045GX950A.webp",
+    "specs": [
+      "Resolution: 4K (5120 x 2160)",
+      "Refresh rate (Hz): 330",
+      "Screen size (inch): 45",
+      "Response time (ms): 0.03"
+    ],
+    "stock": 33,
+    "connections": [],
+    "size": "45\"",
+    "refreshRate": "330Hz"
+  },
+  {
+    "id": 303,
+    "name": "ASUS TUF Gaming VG27AQ5F",
+    "category": "monitor",
+    "brand": "Asus",
+    "price": 5090000,
+    "image": "/products/Monitor/ASUS%20TUF%20Gaming%20VG27AQ5F.webp",
+    "specs": [
+      "Resolution: 2K QHD (2560 x 1440)",
+      "Refresh rate (Hz): 220",
+      "Screen size (inch): 27",
+      "Response time (ms): 0.3"
+    ],
+    "stock": 40,
+    "connections": [],
+    "size": "27\"",
+    "refreshRate": "220Hz"
+  },
+  {
+    "id": 304,
+    "name": "ASUS ROG Strix XG27AQNGV",
+    "category": "monitor",
+    "brand": "Asus",
+    "price": 17990000,
+    "image": "/products/Monitor/Asus%20ROG%20Strix%20XG27AQNGV.webp",
+    "specs": [
+      "Resolution: 2K QHD (2560 x 1440)",
+      "Refresh rate (Hz): 360",
+      "Screen size (inch): 27",
+      "Response time (ms): 1"
+    ],
+    "stock": 47,
+    "connections": [],
+    "size": "27\"",
+    "refreshRate": "360Hz"
+  },
+  {
+    "id": 305,
+    "name": "ViewSonic VA24G1",
+    "category": "monitor",
+    "brand": "ViewSonic",
+    "price": 2190000,
+    "image": "/products/Monitor/ViewSonic%20VA24G1.webp",
+    "specs": [
+      "Resolution: Full HD (1920 x 1080)",
+      "Refresh rate (Hz): 144",
+      "Screen size (inch): 23.8",
+      "Response time (ms): 1"
+    ],
+    "stock": 13,
+    "connections": [],
+    "size": "23.8\"",
+    "refreshRate": "144Hz"
+  },
+  {
+    "id": 306,
+    "name": "ViewSonic VX2536A",
+    "category": "monitor",
+    "brand": "ViewSonic",
+    "price": 3990000,
+    "image": "/products/Monitor/ViewSonic%20VX2536A.webp",
+    "specs": [
+      "Resolution: Full HD (1920 x 1080)",
+      "Refresh rate (Hz): 320",
+      "Screen size (inch): 25",
+      "Response time (ms): 0.5"
+    ],
+    "stock": 20,
+    "connections": [],
+    "size": "25\"",
+    "refreshRate": "320Hz"
+  },
+  {
+    "id": 307,
+    "name": "Samsung Odyssey G3 G30D",
+    "category": "monitor",
+    "brand": "Samsung",
+    "price": 3490000,
+    "image": "/products/Monitor/Samsung%20Odyssey%20G3%20G30D.webp",
+    "specs": [
+      "Resolution: Full HD (1920 x 1080)",
+      "Refresh rate (Hz): 180",
+      "Screen size (inch): 27",
+      "Response time (ms): 1"
+    ],
+    "stock": 27,
+    "connections": [],
+    "size": "27\"",
+    "refreshRate": "180Hz"
+  },
+  {
+    "id": 308,
+    "name": "Samsung Odyssey Oled G6 G60SD",
+    "category": "monitor",
+    "brand": "Samsung",
+    "price": 12890000,
+    "image": "/products/Monitor/Samsung%20Odyssey%20Oled%20G6%20G60SD.webp",
+    "specs": [
+      "Resolution: 2K QHD (2560 x 1440)",
+      "Refresh rate (Hz): 240",
+      "Screen size (inch): 27",
+      "Response time (ms): 0.03"
+    ],
+    "stock": 34,
+    "connections": [],
+    "size": "27\"",
+    "refreshRate": "240Hz"
+  },
+  {
+    "id": 309,
+    "name": "GIGABYTE GS27FA",
+    "category": "monitor",
+    "brand": "GIGABYTE",
+    "price": 2990000,
+    "image": "/products/Monitor/GIGABYTE%20GS27FA.webp",
+    "specs": [
+      "Resolution: Full HD (1920 x 1080)",
+      "Refresh rate (Hz): 180",
+      "Screen size (inch): 27",
+      "Response time (ms): 1"
+    ],
+    "stock": 41,
+    "connections": [],
+    "size": "27\"",
+    "refreshRate": "180Hz"
+  },
+  {
+    "id": 310,
+    "name": "GIGABYTE GO27Q24",
+    "category": "monitor",
+    "brand": "GIGABYTE",
+    "price": 12590000,
+    "image": "/products/Monitor/GIGABYTE%20GO27Q24.webp",
+    "specs": [
+      "Resolution: 2K QHD (2560 x 1440)",
+      "Refresh rate (Hz): 240",
+      "Screen size (inch): 27",
+      "Response time (ms): 0.03"
+    ],
+    "stock": 48,
+    "connections": [],
+    "size": "27\"",
+    "refreshRate": "240Hz"
+  },
+  {
+    "id": 401,
+    "name": "HyperX Cloud III Wireless",
+    "category": "headphone",
+    "brand": "HyperX",
+    "price": 3600000,
+    "image": "/products/Headphone/HyperX%20Cloud%20III%20Wireless.webp",
+    "specs": [
+      "Connection type: Wireless 2.4GHz",
+      "Driver size (mm): 53",
+      "Microphone: Omni-directional",
+      "Weight (g): 330"
+    ],
+    "stock": 29,
+    "connections": [
+      "2.4GHz"
+    ]
+  },
+  {
+    "id": 402,
+    "name": "HyperX Cloud II",
+    "category": "headphone",
+    "brand": "HyperX",
+    "price": 1900000,
+    "image": "/products/Headphone/HyperX%20Cloud%20II.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Driver size (mm): 53",
+      "Microphone: Cardioid",
+      "Weight (g): 320"
+    ],
+    "stock": 36,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 403,
+    "name": "Razer BlackShark V2 Pro",
+    "category": "headphone",
+    "brand": "Razer",
+    "price": 5100000,
+    "image": "/products/Headphone/Razer%20BlackShark%20V2%20Pro.webp",
+    "specs": [
+      "Connection type: Tri-mode (Wireless 2.4GHz HyperSpeed, Bluetooth 5.2)",
+      "Driver size (mm): 50",
+      "Microphone: Razer HyperClear Super Wideband 9.9mm",
+      "Weight (g): 320"
+    ],
+    "stock": 43,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz"
+    ]
+  },
+  {
+    "id": 404,
+    "name": "Razer BlackShark V2 X",
+    "category": "headphone",
+    "brand": "Razer",
+    "price": 990000,
+    "image": "/products/Headphone/Razer%20BlackShark%20V2%20X.jpg",
+    "specs": [
+      "Connection type: Wired",
+      "Driver size (mm): 50",
+      "Microphone: Razer HyperClear Cardioid",
+      "Weight (g): 240"
+    ],
+    "stock": 50,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 405,
+    "name": "Logitech G PRO X 2 LIGHTSPEED",
+    "category": "headphone",
+    "brand": "Logitech",
+    "price": 4900000,
+    "image": "/products/Headphone/Logitech%20G%20PRO%20X%202%20LIGHTSPEED.jpg",
+    "specs": [
+      "Connection type: Tri-mode (Wireless 2.4GHz HyperSpeed, Bluetooth 5.2)",
+      "Driver size (mm): 50",
+      "Microphone: Blue VO!CE",
+      "Weight (g): 345"
+    ],
+    "stock": 16,
+    "connections": [
+      "Bluetooth",
+      "2.4GHz"
+    ]
+  },
+  {
+    "id": 406,
+    "name": "Logitech G435 LIGHTSPEED",
+    "category": "headphone",
+    "brand": "Logitech",
+    "price": 1150000,
+    "image": "/products/Headphone/Logitech%20G435%20LIGHTSPEED.jpg",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "Driver size (mm): 40",
+      "Microphone: Dual Beamforming",
+      "Weight (g): 165"
+    ],
+    "stock": 23,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 407,
+    "name": "SteelSeries Arctis Nova 7 Wireless",
+    "category": "headphone",
+    "brand": "SteelSeries",
+    "price": 4100000,
+    "image": "/products/Headphone/SteelSeries%20Arctis%20Nova%207%20Wireless.webp",
+    "specs": [
+      "Connection type: Dual-mode (Wireless USB 2.4GHz & Wired)",
+      "Driver size (mm): 40",
+      "Microphone: ClearCast Gen 2",
+      "Weight (g): 325"
+    ],
+    "stock": 30,
+    "connections": [
+      "2.4GHz",
+      "Có dây",
+      "USB"
+    ]
+  },
+  {
+    "id": 408,
+    "name": "SteelSeries Arctis Nova 1",
+    "category": "headphone",
+    "brand": "SteelSeries",
+    "price": 1550000,
+    "image": "/products/Headphone/SteelSeries%20Arctis%20Nova%201.jpg",
+    "specs": [
+      "Connection type: Wired",
+      "Driver size (mm): 40",
+      "Microphone: ClearCast Gen 2",
+      "Weight (g): 236"
+    ],
+    "stock": 37,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 409,
+    "name": "Corsair HS80 RGB Wireless",
+    "category": "headphone",
+    "brand": "Corsair",
+    "price": 3200000,
+    "image": "/products/Headphone/Corsair%20HS80%20RGB%20Wireless.jpg",
+    "specs": [
+      "Connection type: Slipstream Wireless 2.4GHz",
+      "Driver size (mm): 50",
+      "Microphone: Broadcast-grade Omni-directional",
+      "Weight (g): 367"
+    ],
+    "stock": 44,
+    "connections": [
+      "2.4GHz"
+    ]
+  },
+  {
+    "id": 410,
+    "name": "Corsair HS55 Surround",
+    "category": "headphone",
+    "brand": "Corsair",
+    "price": 1450000,
+    "image": "/products/Headphone/Corsair%20HS55%20Surround.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Driver size (mm): 50",
+      "Microphone: Omni-directional",
+      "Weight (g): 273"
+    ],
+    "stock": 10,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 501,
+    "name": "HyperX QuadCast S",
+    "category": "mic",
+    "brand": "HyperX",
+    "price": 3800000,
+    "image": "/products/Microphone/HyperX%20QuadCast%20S.jpg",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Condenser",
+      "Polar pattern: 4-modes (Cardioid, Omnidirectional, Bidirectional, Stereo)",
+      "Sample rate & bit depth: 16-bit / 48kHz."
+    ],
+    "stock": 32,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 502,
+    "name": "HyperX SoloCast",
+    "category": "mic",
+    "brand": "HyperX",
+    "price": 1100000,
+    "image": "/products/Microphone/HyperX%20SoloCast.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Condenser",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 16-bit / 48kHz."
+    ],
+    "stock": 39,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 503,
+    "name": "Elgato Wave 3",
+    "category": "mic",
+    "brand": "Elgato",
+    "price": 3750000,
+    "image": "/products/Microphone/Elgato%20Wave%203.jpg",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Condenser",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 24-bit / 96kHz"
+    ],
+    "stock": 46,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 504,
+    "name": "Elgato Wave DX",
+    "category": "mic",
+    "brand": "Elgato",
+    "price": 2900000,
+    "image": "/products/Microphone/Elgato%20Wave%20DX.jpg",
+    "specs": [
+      "Connection type: XLR 3",
+      "Microphone type: Dynamic",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 24-bit / 96kHz"
+    ],
+    "stock": 12,
+    "connections": [
+      "XLR"
+    ]
+  },
+  {
+    "id": 505,
+    "name": "Razer Seiren V2 Pro",
+    "category": "mic",
+    "brand": "Razer",
+    "price": 3300000,
+    "image": "/products/Microphone/Razer%20Seiren%20V2%20Pro.webp",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Dynamic",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 24-bit / 96kHz"
+    ],
+    "stock": 19,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 506,
+    "name": "Razer Seiren Mini",
+    "category": "mic",
+    "brand": "Razer",
+    "price": 899000,
+    "image": "/products/Microphone/Razer%20Seiren%20Mini.png",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Condenser",
+      "Polar pattern: Supercardioid",
+      "Sample rate & bit depth: 16-bit / 48kHz"
+    ],
+    "stock": 26,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 507,
+    "name": "Shure MV7+",
+    "category": "mic",
+    "brand": "Shure",
+    "price": 6999999,
+    "image": "/products/Microphone/Shure%20MV7%2B.png",
+    "specs": [
+      "Connection type: Hybrid (USB Type-C & XLR 3)",
+      "Microphone type: Dynamic",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 24-bit / 48kHz"
+    ],
+    "stock": 33,
+    "connections": [
+      "XLR",
+      "USB-C"
+    ]
+  },
+  {
+    "id": 508,
+    "name": "Shure MV6",
+    "category": "mic",
+    "brand": "Shure",
+    "price": 3899999,
+    "image": "/products/Microphone/Shure%20MV6.png",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Dynamic",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 24-bit / 48kHz"
+    ],
+    "stock": 40,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 509,
+    "name": "FIFINE AmpliGame A8",
+    "category": "mic",
+    "brand": "FIFINE",
+    "price": 998000,
+    "image": "/products/Microphone/FIFINE%20AmpliGame%20A8.jpg",
+    "specs": [
+      "Connection type: Wired",
+      "Microphone type: Condenser",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 16-bit / 44.1kHz - 48kHz"
+    ],
+    "stock": 47,
+    "connections": [
+      "Có dây"
+    ]
+  },
+  {
+    "id": 510,
+    "name": "FIFINE AmpliGame AM8",
+    "category": "mic",
+    "brand": "FIFINE",
+    "price": 1250000,
+    "image": "/products/Microphone/FIFINE%20AmpliGame%20AM8.webp",
+    "specs": [
+      "Connection type: Hybrid (USB Type-C & XLR 3)",
+      "Microphone type: Dynamic",
+      "Polar pattern: Cardioid",
+      "Sample rate & bit depth: 16-bit / 44.1kHz - 48kHz"
+    ],
+    "stock": 13,
+    "connections": [
+      "XLR",
+      "USB-C"
+    ]
+  },
+  {
+    "id": 601,
+    "name": "Razer Gigantus V2 Pro L Speed",
+    "category": "mousepad",
+    "brand": "Razer",
+    "price": 399000,
+    "image": "/products/Pads/Razer%20Gigantus%20V2%20Pro%20L%20Speed.webp",
+    "specs": [
+      "Dimensions (mm): 500 x 480 x 3",
+      "Surface material: Thick fabric",
+      "Base material: Rubber foam"
+    ],
+    "stock": 35,
+    "connections": []
+  },
+  {
+    "id": 602,
+    "name": "Razer Gigantus V2",
+    "category": "mousepad",
+    "brand": "Razer",
+    "price": 1290000,
+    "image": "/products/Pads/Razer%20Gigantus%20V2.jpg",
+    "specs": [
+      "Dimensions (mm): 450 x 400 x 3",
+      "Surface material: Tempered glass",
+      "Base material: Rubber foam"
+    ],
+    "stock": 42,
+    "connections": []
+  },
+  {
+    "id": 603,
+    "name": "AKKO Dracula Castle XXL",
+    "category": "mousepad",
+    "brand": "Akko",
+    "price": 250000,
+    "image": "/products/Pads/AKKO%20Dracula%20Castle%20XXL.webp",
+    "specs": [
+      "Dimensions (mm): 900 x 400 x 4",
+      "Surface material: Smooth fabric",
+      "Base material: Natural rubber"
+    ],
+    "stock": 49,
+    "connections": []
+  },
+  {
+    "id": 604,
+    "name": "Akko World Tour Tokyo XXL",
+    "category": "mousepad",
+    "brand": "Akko",
+    "price": 350000,
+    "image": "/products/Pads/Akko%20World%20Tour%20Tokyo%20XXL.webp",
+    "specs": [
+      "Dimensions (mm): 900 x 400 x 4",
+      "Surface material: Smooth fabric",
+      "Base material: Natural rubber"
+    ],
+    "stock": 15,
+    "connections": []
+  },
+  {
+    "id": 605,
+    "name": "DareU ESP108",
+    "category": "mousepad",
+    "brand": "DareU",
+    "price": 90000,
+    "image": "/products/Pads/DareU%20ESP108.webp",
+    "specs": [
+      "Dimensions (mm): 450 x 400 x 5",
+      "Surface material: Smooth fabric",
+      "Base material: Natural rubber"
+    ],
+    "stock": 22,
+    "connections": []
+  },
+  {
+    "id": 606,
+    "name": "DareU ESP102",
+    "category": "mousepad",
+    "brand": "DareU",
+    "price": 149000,
+    "image": "/products/Pads/DareU%20ESP102.webp",
+    "specs": [
+      "Dimensions (mm): 350 x 300 x 5",
+      "Surface material: Smooth fabric",
+      "Base material: Natural rubber"
+    ],
+    "stock": 29,
+    "connections": []
+  },
+  {
+    "id": 607,
+    "name": "Pulsar Superglide Glass Mousepad",
+    "category": "mousepad",
+    "brand": "Pulsar",
+    "price": 2449000,
+    "image": "/products/Pads/Pulsar%20Superglide%20Glass%20Mousepad.jpg",
+    "specs": [
+      "Dimensions (mm): 490 x 420 x 4",
+      "Surface material: Tempered aluminosilicate glass",
+      "Base material: Silicone rubber"
+    ],
+    "stock": 36,
+    "connections": []
+  },
+  {
+    "id": 608,
+    "name": "Pulsar Paracontrol V2",
+    "category": "mousepad",
+    "brand": "Pulsar",
+    "price": 519000,
+    "image": "/products/Pads/Pulsar%20Paracontrol%20V2.jpg",
+    "specs": [
+      "Dimensions (mm): 490 x 420 x 4",
+      "Surface material: Fabric",
+      "Base material: Natural rubber"
+    ],
+    "stock": 43,
+    "connections": []
+  },
+  {
+    "id": 609,
+    "name": "ZOWIE G-SR II",
+    "category": "mousepad",
+    "brand": "ZOWIE",
+    "price": 1050000,
+    "image": "/products/Pads/ZOWIE%20G-SR%20II.webp",
+    "specs": [
+      "Dimensions (mm): 470 x 390 x 3.5",
+      "Surface material: Thick fabric",
+      "Base material: Rubber"
+    ],
+    "stock": 50,
+    "connections": []
+  },
+  {
+    "id": 610,
+    "name": "ZOWIE G-SR-SE Rouge",
+    "category": "mousepad",
+    "brand": "ZOWIE",
+    "price": 899000,
+    "image": "/products/Pads/ZOWIE%20G-SR-SE%20Rouge.webp",
+    "specs": [
+      "Dimensions (mm): 470 x 390 x 3.5",
+      "Surface material: Smooth fabric",
+      "Base material: High-density rubber"
+    ],
+    "stock": 16,
+    "connections": []
+  }
+]

@@ -1,5 +1,5 @@
 import { useId, useState, type FormEvent } from 'react'
-import { AuthApiError } from '../authTypes'
+import { ApiError } from '../../../services/apiClient'
 import type { AccountProfile, AuthUser } from '../authTypes'
 
 export default function ProfileForm({ user, onSave }: { user: AuthUser; onSave: (profile: AccountProfile) => Promise<void> }) {
@@ -15,7 +15,7 @@ export default function ProfileForm({ user, onSave }: { user: AuthUser; onSave: 
     setError('')
     setSaving(true)
     try { await onSave({ fullName: fullName.trim(), phone: phone.trim() }) }
-    catch (error) { setError(error instanceof AuthApiError ? Object.values(error.details).join(' ') || error.message : error instanceof Error ? error.message : 'Could not save profile.') }
+    catch (error) { setError(error instanceof ApiError ? Object.values(error.details).join(' ') || error.message : error instanceof Error ? error.message : 'Could not save profile.') }
     finally { setSaving(false) }
   }
   return <form className="account-profile" onSubmit={submit}>

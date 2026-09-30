@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import ServiceBenefits from './components/layout/ServiceBenefits'
@@ -10,11 +10,12 @@ import ProductSection from './features/products/components/ProductSection'
 import type { ShopProduct } from './features/products/models/shopProduct'
 import AuthModal from './features/auth/components/AuthModal'
 import useAuth from './features/auth/useAuth'
-import { AuthApiError } from './features/auth/authTypes'
+import { ApiError } from './services/apiClient'
 import type { AuthView, LoginCredentials, RegisterCredentials } from './features/auth/authTypes'
 import CartDrawer from './features/cart/components/CartDrawer'
 import { addItem, cartCount, changeQuantity, type CartLine } from './features/cart/models/cartModel'
 import CheckoutModal from './features/checkout/components/CheckoutModal'
+import { getToken, subscribeSession } from './services/tokenStore'
 import './App.css'
 
 export default function App() {
@@ -28,6 +29,12 @@ export default function App() {
   const [pendingProduct, setPendingProduct] = useState<ShopProduct | null>(null)
   const [notice, setNotice] = useState('')
   const [info, setInfo] = useState<string | null>(null)
+  useEffect(() => subscribeSession(() => {
+    if (!getToken()) {
+      setCart([]); setPanel(null); setPendingProduct(null)
+      setNotice('Session ended. Please log in again.')
+    }
+  }), [])
   const dismissNotice = useCallback(() => setNotice(''), [])
   const closeAuth = useCallback(() => { setAuthView(null); setPendingProduct(null) }, [])
   function chooseCategory(value: string) { setCategory(value); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }
@@ -42,7 +49,7 @@ export default function App() {
       if (pendingProduct) setCart(previous => addItem(previous, pendingProduct))
       setNotice(pendingProduct ? `${pendingProduct.name} added to cart` : `Welcome, ${next.username}!`)
       closeAuth()
-    } catch (error) { setAuthDetails(error instanceof AuthApiError ? error.details : {}); setAuthError(error instanceof Error ? error.message : 'Login failed.') }
+    } catch (error) { setAuthDetails(error instanceof ApiError ? error.details : {}); setAuthError(error instanceof Error ? error.message : 'Login failed.') }
   }
   async function register(credentials: RegisterCredentials) {
     setAuthError(''); setAuthDetails({})
@@ -50,7 +57,7 @@ export default function App() {
       await registerAccount(credentials)
       setAuthView('login')
       setNotice('Account created. Please log in.')
-    } catch (error) { setAuthDetails(error instanceof AuthApiError ? error.details : {}); setAuthError(error instanceof Error ? error.message : 'Registration failed.') }
+    } catch (error) { setAuthDetails(error instanceof ApiError ? error.details : {}); setAuthError(error instanceof Error ? error.message : 'Registration failed.') }
   }
   function logout() { signOut(); setCart([]); setPanel(null); setNotice('Logged out') }
   return <div id="top">

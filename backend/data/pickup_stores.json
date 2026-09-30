@@ -1,0 +1,6 @@
+[
+  {"id": "yen-lang", "name": "29GG — Yên Lãng", "address": "120 Yên Lãng, phường Đống Đa, Hà Nội", "active": 1},
+  {"id": "kim-ma", "name": "29GG — Kim Mã", "address": "300 Kim Mã, phường Giảng Võ, Hà Nội", "active": 1},
+  {"id": "nguyen-thai-hoc", "name": "29GG — Nguyễn Thái Học", "address": "155 Nguyễn Thái Học, phường Tam Thắng, Hồ Chí Minh City", "active": 1},
+  {"id": "hoang-van-thu", "name": "29GG — Hoàng Văn Thụ", "address": "318 Hoàng Văn Thụ, phường Tân Sơn Nhất, Hồ Chí Minh City", "active": 1}
+]
