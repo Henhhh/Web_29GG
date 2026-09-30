@@ -1,12 +1,12 @@
 # Database 29GG
 
-Thiết kế chung dùng SQLite, module Python `sqlite3` và SQL trực tiếp. Auth, schema sản phẩm/giỏ/đơn/thanh toán/pickup và seed sản phẩm/pickup đã triển khai. API sản phẩm, giỏ và đơn chưa triển khai. Tạo bảng bằng `schema.sql`, nhập dữ liệu mẫu bằng script seed.
+Thiết kế chung dùng SQLite, module Python `sqlite3` và SQL trực tiếp. Auth, schema sản phẩm/giỏ/đơn/thanh toán/pickup, seed và API tương ứng đã triển khai. Tạo bảng bằng `schema.sql`, nhập dữ liệu mẫu bằng script seed.
 
 ## Thiết kế chi tiết cặp 3 — giỏ, đơn, thanh toán, pickup
 
-Đã viết SQL và seed 4 pickup; chưa viết API cho phần này. Tất cả tiền là INTEGER VNĐ; số lượng là INTEGER > 0 (API phải từ chối boolean trước khi ghi SQLite). Thời gian do backend tạo, API trả ISO 8601 UTC. Chạy `flask --app backend/app.py seed-pickup` bằng Python trong virtual environment để tạo bảng còn thiếu và seed cửa hàng.
+SQL, seed 4 pickup và API giỏ/pickup/đơn đã triển khai. Tất cả tiền là INTEGER VNĐ; số lượng là INTEGER > 0 (API từ chối boolean trước khi ghi SQLite). Thời gian do backend tạo, API trả ISO 8601 UTC. Chạy `flask --app backend/app.py seed-pickup` bằng Python trong virtual environment để tạo bảng còn thiếu và seed cửa hàng.
 
-SQL kiểm tra khóa ngoại, tính duy nhất, số lượng, tổng tiền và các trường bắt buộc theo ship/pickup. Các kiểm tra liên bảng (subtotal bằng tổng chi tiết, payment.amount bằng orders.total), tồn kho, cửa hàng đang hoạt động và xác minh thanh toán thuộc transaction/API sẽ triển khai sau.
+SQL kiểm tra khóa ngoại, tính duy nhất, số lượng, tổng tiền và các trường bắt buộc theo ship/pickup. API kiểm tra cửa hàng đang hoạt động, xác thực tỉnh/phường, tính lại subtotal và payment amount, đồng thời trừ kho và xóa giỏ trong transaction. Xác minh thanh toán chưa tích hợp; payment mới luôn pending.
 
 ### cart_items
 

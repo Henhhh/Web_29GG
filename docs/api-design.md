@@ -1,6 +1,6 @@
 # API 29GG
 
-Hợp đồng giữa React và Flask. Base path `/api`, JSON dùng `snake_case`, tiền là số nguyên VNĐ. Frontend ánh xạ sang model TypeScript khi cần. Auth và catalog sản phẩm đã triển khai; giỏ và đơn hàng vẫn đang chờ.
+Hợp đồng giữa React và Flask. Base path `/api`, JSON dùng `snake_case`, tiền là số nguyên VNĐ. Frontend ánh xạ sang model TypeScript khi cần. Auth, catalog, giỏ, pickup và đơn hàng đã triển khai.
 
 ## 1. Xác thực và định dạng
 
@@ -90,7 +90,7 @@ category_id/brand_id trong ví dụ là minh họa; seed quyết định ID th�
 - FE ánh xạ category slug sang nhãn hiện tại; original_price → originalPrice, screen_size → size có dấu inch, refresh_rate → refreshRate có Hz. NULL → undefined cho các trường tùy chọn của model FE.
 - Các API trên công khai, không yêu cầu JWT. Chưa bổ sung API quản trị sản phẩm trong phạm vi này.
 
-### Hợp đồng cặp 3 — chưa triển khai
+### Hợp đồng cặp 3 — đã triển khai
 
 GET /api/cart và POST/PATCH giỏ trả cùng dạng dưới đây. Giỏ trống trả items=[], subtotal=0. Tất cả API giỏ/đơn dùng auth: true; pickup công khai.
 
@@ -183,7 +183,7 @@ Password length: 6-128 characters. Username: 1-80 characters.
 Login limit: 10 valid-format attempts per email and client IP per 15 minutes, stored in SQLite login_limits.
 Implemented: /api/auth/register, /api/auth/login, GET/PATCH /api/me, GET /api/health.
 Product catalog endpoints are implemented and covered by `backend/tests/test_products_api.py`.
-Cart and order endpoints remain planned. See backend/README.md for setup.
+Cart, pickup, checkout and order history endpoints are implemented. See backend/README.md for setup.
 
 ## Shared frontend client
 

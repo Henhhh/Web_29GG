@@ -1,7 +1,7 @@
 # 29GG Auth backend
 
-Implemented: Flask + sqlite3, registration, JWT login, GET/PATCH /api/me, and public product catalog APIs.
-Cart/order/payment schemas and product/pickup seeds are available; cart and order routes remain placeholders.
+Implemented: Flask + sqlite3, registration, JWT login, GET/PATCH /api/me, public product catalog APIs, authenticated cart APIs, pickup stores, checkout and order history.
+Checkout reserves stock and creates the order, item snapshots, pending payment, and cart deletion in one SQLite transaction. Payment gateways are not connected.
 
 ## Run on Windows PowerShell
 
@@ -48,13 +48,17 @@ Do not point it at the archive's SQLAlchemy users.db: migrate that database sepa
 - GET /api/products: public catalog with search, filters and pagination.
 - GET /api/products/{id}: public product detail.
 - GET /api/categories and GET /api/brands: public filter metadata.
+- GET /api/pickup-stores: active pickup locations.
+- GET/POST /api/cart and PATCH/DELETE /api/cart/items/{product_id}: authenticated cart owned by the current account.
+- POST /api/orders: validates order details, recalculates totals, decrements stock, stores the order and pending payment, and clears the cart atomically.
+- GET /api/orders and GET /api/orders/{id}: order history and detail restricted to the current account.
 
 JWT uses HS256, sub=user ID, iat and exp; expiry is 2 hours.
 Secret is required (minimum 32 characters; generate randomly).
 Frontend stores token in memory only: refresh requires login; logout clears it.
 Logout does not revoke a copied token before expiry.
 Profile is persisted in SQLite and returned at the next login; checkout autofill uses it.
-Cart and checkout remain frontend demos, not protected order APIs yet.
+Cart is stored per account in SQLite. Checkout sends contact and delivery details plus a payment method. Card fields remain demo-only and are never sent to the backend; payments stay pending because no payment provider is integrated.
 
 Validation: JSON object required; email format; password 6-128 characters (not trimmed);
 username 1-80 characters, normalized lowercase; full_name 1-100; phone 7-20 allowed characters.
@@ -73,6 +77,9 @@ are not trusted automatically. Rate limiting currently covers login, not registr
 - validation.py: shared errors and Auth/profile input checks.
 - routes/auth.py: register, login, profile endpoints.
 - routes/products.py: public product listing/detail, category and brand endpoints.
+- routes/cart.py: account-owned cart and public active pickup locations.
+- routes/orders.py: transactional checkout and account-owned order history.
+- data/vietnam_divisions.json: province/ward snapshot for server-side delivery code validation.
 - tests/test_auth.py: API, persistence, validation, ownership, JWT and rate-limit tests.
 - tests/test_products_api.py: catalog, search/filter, pagination and validation tests.
 
@@ -118,7 +125,6 @@ init-db creates missing tables; changing constraints on an existing table needs 
 
 Database constraints enforce positive quantities, integer VND amounts, delivery address branches,
 unique cart/order items and one payment per order. History foreign keys restrict deletion.
-The future checkout API must validate stock and active stores, compute totals from products,
-ensure payment amount equals order total, and write the order/stock/cart changes in one transaction.
-Boolean input rejection, address relationships and email/phone validation belong to the API.
-No payment verification or stock deduction is implemented by this schema/seed step.
+Checkout validates stock and active stores, computes totals from products, and writes the order,
+payment, stock and cart changes in one transaction. Boolean input is rejected and province/ward
+codes are checked against the server-side snapshot. Payment verification is not integrated.

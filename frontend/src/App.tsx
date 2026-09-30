@@ -13,8 +13,9 @@ import useAuth from './features/auth/useAuth'
 import { ApiError } from './services/apiClient'
 import type { AuthView, LoginCredentials, RegisterCredentials } from './features/auth/authTypes'
 import CartDrawer from './features/cart/components/CartDrawer'
-import { addItem, cartCount, changeQuantity, type CartLine } from './features/cart/models/cartModel'
+import { cartCount, type CartLine } from './features/cart/models/cartModel'
 import CheckoutModal from './features/checkout/components/CheckoutModal'
+import { addCartItem, fetchCart, removeCartItem, updateCartItem } from './features/cart/cartApi'
 import { getToken, subscribeSession } from './services/tokenStore'
 import './App.css'
 
@@ -38,17 +39,24 @@ export default function App() {
   const dismissNotice = useCallback(() => setNotice(''), [])
   const closeAuth = useCallback(() => { setAuthView(null); setPendingProduct(null) }, [])
   function chooseCategory(value: string) { setCategory(value); document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' }) }
-  function addToCart(product: ShopProduct) {
+  async function addToCart(product: ShopProduct) {
     if (!user) { setPendingProduct(product); setAuthView('login'); return }
-    setCart(previous => addItem(previous, product)); setNotice(`${product.name} added to cart`)
+    try {
+      const result = await addCartItem(product.id)
+      setCart(result.items); setNotice(`${product.name} added to cart`)
+    } catch (error) { setNotice(error instanceof Error ? error.message : 'Could not update your cart.') }
   }
   async function login(credentials: LoginCredentials) {
     setAuthError(''); setAuthDetails({})
     try {
       const next = await signIn(credentials)
-      if (pendingProduct) setCart(previous => addItem(previous, pendingProduct))
-      setNotice(pendingProduct ? `${pendingProduct.name} added to cart` : `Welcome, ${next.username}!`)
       closeAuth()
+      try {
+        const result = await fetchCart()
+        setCart(result.items)
+        if (pendingProduct) setCart((await addCartItem(pendingProduct.id)).items)
+        setNotice(pendingProduct ? `${pendingProduct.name} added to cart` : `Welcome, ${next.username}!`)
+      } catch (error) { setNotice(error instanceof Error ? error.message : 'Could not load your cart.') }
     } catch (error) { setAuthDetails(error instanceof ApiError ? error.details : {}); setAuthError(error instanceof Error ? error.message : 'Login failed.') }
   }
   async function register(credentials: RegisterCredentials) {
@@ -60,13 +68,27 @@ export default function App() {
     } catch (error) { setAuthDetails(error instanceof ApiError ? error.details : {}); setAuthError(error instanceof Error ? error.message : 'Registration failed.') }
   }
   function logout() { signOut(); setCart([]); setPanel(null); setNotice('Logged out') }
+  async function openCart() {
+    setPanel('cart')
+    if (!user) return
+    try { setCart((await fetchCart()).items) }
+    catch (error) { setNotice(error instanceof Error ? error.message : 'Could not load your cart.') }
+  }
+  async function changeCartQuantity(id: number, quantity: number) {
+    try { setCart((await updateCartItem(id, quantity)).items) }
+    catch (error) { setNotice(error instanceof Error ? error.message : 'Could not update your cart.') }
+  }
+  async function deleteCartItem(id: number) {
+    try { await removeCartItem(id); setCart(previous => previous.filter(item => item.id !== id)) }
+    catch (error) { setNotice(error instanceof Error ? error.message : 'Could not remove this item.') }
+  }
   return <div id="top">
     <a className="skip-link" href="#products">Skip to products</a>
-    <Header user={user} count={cartCount(cart)} category={category} onCategory={chooseCategory} onAuth={setAuthView} onCart={() => setPanel('cart')} onLogout={logout} onProfileSave={updateProfile} />
+    <Header user={user} count={cartCount(cart)} category={category} onCategory={chooseCategory} onAuth={setAuthView} onCart={openCart} onLogout={logout} onProfileSave={updateProfile} />
     <main><HeroSection signedIn={!!user} onRegister={() => setAuthView('register')} /><PromoBanner onShop={chooseCategory} /><ProductSection category={category} onCategory={setCategory} cart={cart} onAdd={addToCart} /><ServiceBenefits /></main>
     <Footer onInfo={setInfo} />
     <AuthModal isOpen={authView !== null} view={authView ?? 'login'} error={authError} details={authDetails} onClose={closeAuth} onViewChange={view => { setAuthError(''); setAuthDetails({}); setAuthView(view) }} onLogin={login} onRegister={register} />
-    {panel === 'cart' && <CartDrawer items={cart} onClose={() => setPanel(null)} onRemove={id => setCart(previous => previous.filter(item => item.id !== id))} onQuantityChange={(id, quantity) => setCart(previous => changeQuantity(previous, id, quantity))} onCheckout={() => setPanel('checkout')} onAuth={!user ? view => { setPanel(null); setAuthView(view) } : undefined} />}
+    {panel === 'cart' && <CartDrawer items={cart} onClose={() => setPanel(null)} onRemove={deleteCartItem} onQuantityChange={changeCartQuantity} onCheckout={() => setPanel('checkout')} onAuth={!user ? view => { setPanel(null); setAuthView(view) } : undefined} />}
     {panel === 'checkout' && <CheckoutModal items={cart} user={user} onClose={() => setPanel(null)} onComplete={() => setCart([])} />}
     {info && <Overlay title={info} onClose={() => setInfo(null)}><p className="shop-info">{info} is not available yet. Details will be added before the shop launches.</p></Overlay>}
     <Toast message={notice} onClose={dismissNotice} />
