@@ -1,7 +1,7 @@
 # 29GG Auth backend
 
-Implemented: Flask + sqlite3, registration, JWT login, GET/PATCH /api/me.
-Product and cart/order/payment/pickup schemas are implemented, with product and pickup seeds. Products/cart/orders API routes remain placeholders.
+Implemented: Flask + sqlite3, registration, JWT login, GET/PATCH /api/me, and public product catalog APIs.
+Cart/order/payment schemas and product/pickup seeds are available; cart and order routes remain placeholders.
 
 ## Run on Windows PowerShell
 
@@ -20,6 +20,7 @@ Do not overwrite an existing .env on subsequent runs.
 
 ```powershell
 backend/.venv/Scripts/python.exe -m flask --app backend/app.py init-db
+backend/.venv/Scripts/python.exe -m flask --app backend/app.py seed-products
 backend/.venv/Scripts/python.exe -m flask --app backend/app.py run --port 5000
 ```
 
@@ -44,6 +45,9 @@ Do not point it at the archive's SQLAlchemy users.db: migrate that database sepa
 - GET /api/me: Bearer token -> current user.
 - PATCH /api/me: Bearer token, full_name and/or phone -> updated user.
 - GET /api/health: basic process health (not a database readiness check).
+- GET /api/products: public catalog with search, filters and pagination.
+- GET /api/products/{id}: public product detail.
+- GET /api/categories and GET /api/brands: public filter metadata.
 
 JWT uses HS256, sub=user ID, iat and exp; expiry is 2 hours.
 Secret is required (minimum 32 characters; generate randomly).
@@ -68,7 +72,9 @@ are not trusted automatically. Rate limiting currently covers login, not registr
 - auth.py: shared JWT helper/decorator; routes use g.user after @require_user.
 - validation.py: shared errors and Auth/profile input checks.
 - routes/auth.py: register, login, profile endpoints.
+- routes/products.py: public product listing/detail, category and brand endpoints.
 - tests/test_auth.py: API, persistence, validation, ownership, JWT and rate-limit tests.
+- tests/test_products_api.py: catalog, search/filter, pagination and validation tests.
 
 Do not copy the archive's .venv, templates, session login, models.py or users.db.
 No SQLAlchemy or Flask-Login dependency is used. Keep .env, .venv and database files out of Git.

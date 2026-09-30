@@ -1,6 +1,6 @@
 # API 29GG
 
-Hợp đồng giữa React và Flask; chưa phải API đã triển khai. Base path `/api`, JSON dùng `snake_case`, tiền là số nguyên VNĐ. Frontend ánh xạ sang model TypeScript khi cần.
+Hợp đồng giữa React và Flask. Base path `/api`, JSON dùng `snake_case`, tiền là số nguyên VNĐ. Frontend ánh xạ sang model TypeScript khi cần. Auth và catalog sản phẩm đã triển khai; giỏ và đơn hàng vẫn đang chờ.
 
 ## 1. Xác thực và định dạng
 
@@ -52,7 +52,7 @@ Các URL dưới đây đều có tiền tố `/api`.
 
 **Tạo đơn:** gửi `full_name`, `email`, `phone`, `delivery_method` (ship/pickup), `payment_method` (card/banking/cash). Ship thêm `province_code`, `ward_code`, `street_address`, `shipping_method`; pickup thêm `pickup_store_id`. Backend lấy sản phẩm từ giỏ và tự tính giá/phí, không tin tổng tiền từ FE. Response gồm reference, items, subtotal, shipping_fee, total, status, payment_status và thông tin nhận hàng. Không gửi dữ liệu thẻ demo.
 
-### Hợp đồng sản phẩm chi tiết (chưa triển khai)
+### Hợp đồng sản phẩm chi tiết (đã triển khai)
 
 GET /api/products/{id} trả object dưới đây trong `data`; GET /api/products trả cùng cấu trúc cho mỗi phần tử `data.items`:
 
@@ -182,7 +182,8 @@ JWT TTL: 7200 seconds (2 hours). Frontend keeps the token in memory only; reload
 Password length: 6-128 characters. Username: 1-80 characters.
 Login limit: 10 valid-format attempts per email and client IP per 15 minutes, stored in SQLite login_limits.
 Implemented: /api/auth/register, /api/auth/login, GET/PATCH /api/me, GET /api/health.
-Other endpoints in this document remain planned. See backend/README.md for setup.
+Product catalog endpoints are implemented and covered by `backend/tests/test_products_api.py`.
+Cart and order endpoints remain planned. See backend/README.md for setup.
 
 ## Shared frontend client
 

@@ -1,9 +1,9 @@
-import { categories } from './filterModel'
+import { categories as fallbackCategories } from './filterModel'
 import './Filters.css'
 
-type Props = { value: string; onChange: (value: string) => void }
+type Props = { value: string; onChange: (value: string) => void; categories?: string[] }
 
-export default function CategoryTabs({ value, onChange }: Props) {
+export default function CategoryTabs({ value, onChange, categories = fallbackCategories }: Props) {
   return (
     <div className="category-tabs" role="group" aria-label="Product categories">
       {categories.map(category => (

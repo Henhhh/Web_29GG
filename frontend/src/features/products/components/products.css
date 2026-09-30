@@ -4,6 +4,10 @@
 .products-layout { display: flex; align-items: flex-start; gap: 24px; }
 .products-results { flex: 1; min-width: 0; }
 .products-count { margin: 0 0 16px; font: 12px 'JetBrains Mono',monospace; color: #9393b7; }
+.products-error { padding: 20px; color: #ff889f; border: 1px solid #642d43; background: #190d17; }
+.products-error p { margin: 0 0 12px; }
+.products-pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 28px; }
+.products-pagination__current { border-color: #00e5ff !important; color: #00e5ff !important; background: rgb(0 229 255 / 8%) !important; }
 .product-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
 .product-card { display: flex; flex-direction: column; background: #0f0f1a; border: 1px solid #1e1e32; transition: border-color .2s; min-width: 0; }
 .product-card:hover { border-color: #23606b; }
