@@ -1,8 +1,9 @@
 import { useId } from 'react'
-import { shippingOptions, stores, type FormProps } from '../models/checkoutModel'
+import { shippingOptions, type FormProps } from '../models/checkoutModel'
+import type { PickupStore } from '../../cart/cartApi'
 import { money } from '../../cart/models/cartModel'
 import ShippingAddressForm from './ShippingAddressForm'
-export default function DeliveryOptions({ value, onChange }: FormProps) {
+export default function DeliveryOptions({ value, onChange, stores }: FormProps & { stores: PickupStore[] }) {
   const id = useId()
   return <fieldset><legend>02 / Delivery method</legend><div className="checkout-columns">
     {(['ship', 'pickup'] as const).map(method => <label className="checkout-choice" key={method}><input type="radio" name={`${id}-delivery`} checked={value.delivery === method} onChange={() => onChange({ ...value, delivery: method })} /><span>{method === 'ship' ? '🚚 Home delivery' : '🏪 Store pickup'}<small>{method === 'ship' ? 'Shipped to your address' : 'Ready in 2–4 hours (demo)'}</small></span></label>)}

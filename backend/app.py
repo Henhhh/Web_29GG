@@ -31,8 +31,12 @@ def create_app(test_config=None):
     init_app(app)
     from routes.auth import bp as auth_bp
     from routes.products import bp as products_bp
+    from routes.cart import bp as cart_bp
+    from routes.orders import bp as orders_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(products_bp)
+    app.register_blueprint(cart_bp)
+    app.register_blueprint(orders_bp)
 
     @app.get("/api/health")
     def health():
