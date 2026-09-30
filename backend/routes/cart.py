@@ -50,23 +50,30 @@ def add_cart_item():
     if details:
         return error("validation_failed", "Please check the cart item.", 422, details)
     db, uid, pid, quantity = get_db(), g.user["id"], body["product_id"], body["quantity"]
-    product = db.execute("SELECT stock FROM products WHERE id=?", (pid,)).fetchone()
-    if product is None:
-        return error("not_found", "Product not found.", 404)
-    existing = db.execute("SELECT quantity FROM cart_items WHERE user_id=? AND product_id=?", (uid, pid)).fetchone()
-    next_quantity = quantity + (existing["quantity"] if existing else 0)
-    if next_quantity > product["stock"]:
-        return error("out_of_stock", "Not enough stock.", 409, {f"product_{pid}": f"Only {product['stock']} item(s) are available."})
     try:
         with db:
+            # Serialize writers before reading quantity/stock, including checkout.
+            db.execute("BEGIN IMMEDIATE")
+            product = db.execute("SELECT stock FROM products WHERE id=?", (pid,)).fetchone()
+            if product is None:
+                return error("not_found", "Product not found.", 404)
+            existing = db.execute("SELECT quantity FROM cart_items WHERE user_id=? AND product_id=?", (uid, pid)).fetchone()
+            next_quantity = quantity + (existing["quantity"] if existing else 0)
+            if next_quantity > product["stock"]:
+                return error("out_of_stock", "Not enough stock.", 409, {f"product_{pid}": f"Only {product['stock']} item(s) are available."})
             db.execute("INSERT INTO cart_items(user_id,product_id,quantity) VALUES (?,?,?) "
                        "ON CONFLICT(user_id,product_id) DO UPDATE SET quantity=excluded.quantity",
                        (uid, pid, next_quantity))
+            payload = _cart_payload()
+    except sqlite3.OperationalError as exc:
+        if "locked" in str(exc).lower() or "busy" in str(exc).lower():
+            return error("service_unavailable", "The cart service is busy. Please try again.", 503)
+        raise
     except sqlite3.IntegrityError:
         return error("not_found", "Product not found.", 404)
     status = 200 if existing else 201
     headers = {"Location": f"/api/cart/items/{pid}"} if status == 201 else {}
-    return {"data": _cart_payload()}, status, headers
+    return {"data": payload}, status, headers
 
 
 @bp.patch("/cart/items/<int:product_id>")
