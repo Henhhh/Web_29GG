@@ -147,9 +147,9 @@ def create_order():
 @require_user
 def list_orders():
     page_text, size_text = request.args.get("page", "1"), request.args.get("page_size", "12")
-    if not page_text.isdigit() or int(page_text) < 1:
+    if not re.fullmatch(r"[0-9]{1,9}", page_text) or int(page_text) < 1:
         return error("validation_failed", "Please check the query parameters.", 422, {"page": "Must be a positive integer."})
-    if not size_text.isdigit() or int(size_text) < 1 or int(size_text) > 100:
+    if not re.fullmatch(r"[0-9]{1,3}", size_text) or int(size_text) < 1 or int(size_text) > 100:
         return error("validation_failed", "Please check the query parameters.", 422, {"page_size": "Must be between 1 and 100."})
     page, size, db = int(page_text), int(size_text), get_db()
     total = db.execute("SELECT COUNT(*) AS n FROM orders WHERE user_id=?", (g.user["id"],)).fetchone()["n"]

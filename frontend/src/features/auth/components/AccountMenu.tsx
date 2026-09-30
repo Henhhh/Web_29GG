@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { AuthUser, AccountProfile } from '../authTypes'
 import Overlay from '../../../components/ui/Overlay'
 import ProfileForm from './ProfileForm'
+import OrderHistory from '../../orders/OrderHistory'
 import './auth.css'
 
 type AccountMenuProps = {
@@ -13,6 +14,7 @@ type AccountMenuProps = {
 export default function AccountMenu({ user, onLogout, onProfileSave }: AccountMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [historyOpen, setHistoryOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const initial = user.username.trim().charAt(0).toUpperCase() || 'P'
 
@@ -54,6 +56,7 @@ export default function AccountMenu({ user, onLogout, onProfileSave }: AccountMe
           <p>Signed in as</p>
           <strong>{user.email}</strong>
           <dl className="account-menu__profile"><dt>Full name</dt><dd>{user.fullName || 'Not provided'}</dd><dt>Phone number</dt><dd>{user.phone || 'Not provided'}</dd></dl>
+          <button type="button" className="account-menu__edit" onClick={() => { setIsOpen(false); setHistoryOpen(true) }}>My Orders</button>
           <button type="button" className="account-menu__edit" onClick={() => { setIsOpen(false); setEditing(true) }}>Edit profile</button>
           <button
             type="button"
@@ -66,6 +69,7 @@ export default function AccountMenu({ user, onLogout, onProfileSave }: AccountMe
           </button>
         </div>
       )}
+      {historyOpen && <OrderHistory onClose={() => setHistoryOpen(false)} />}
       {editing && <Overlay title="Personal information" onClose={() => setEditing(false)}><ProfileForm user={user} onSave={async profile => { await onProfileSave(profile); setEditing(false); setIsOpen(true) }} /></Overlay>}
     </div>
   )
