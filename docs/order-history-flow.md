@@ -1,82 +1,81 @@
-# 05 - Lịch sử đơn hàng
+﻿# 05 - Order History
 
-## 1. Giới thiệu
+## 1. Introduction
 
-- Mục tiêu: cho người dùng xem lại các đơn đã tạo và chi tiết từng đơn.
-- Chỉ tài khoản đã đăng nhập mới truy cập được My Orders.
-- Danh sách sắp xếp mới nhất trước và hiển thị 6 đơn mỗi trang.
-- Dữ liệu lịch sử dùng snapshot được lưu khi checkout, không phụ thuộc catalog hiện tại.
+- Goal: allow users to review their orders and view the details of each order.
+- Only logged-in accounts can access My Orders.
+- Orders are sorted newest first, with 6 orders per page.
+- Order history uses snapshots saved at checkout and does not depend on the current catalog.
 
-## 2. File/source code liên quan
+## 2. Related Files and Source Code
 
 ### Frontend
 
-- `frontend/src/features/auth/components/AccountMenu.tsx`: mở My Orders.
-- `frontend/src/features/orders/OrderHistory.tsx`: danh sách, phân trang và chi tiết đơn.
-- `frontend/src/features/orders/orders.css`: bố cục responsive của lịch sử.
-- `frontend/src/features/checkout/ordersApi.ts`: gọi API danh sách và chi tiết.
-- `frontend/src/components/ui/Overlay.tsx`: hiển thị lịch sử dạng overlay.
-- `frontend/src/services/apiClient.ts`: gắn JWT vào request.
+- `frontend/src/features/auth/components/AccountMenu.tsx`: opens My Orders.
+- `frontend/src/features/orders/OrderHistory.tsx`: order list, pagination, and order details.
+- `frontend/src/features/orders/orders.css`: responsive order history layout.
+- `frontend/src/features/checkout/ordersApi.ts`: calls the order list and detail APIs.
+- `frontend/src/components/ui/Overlay.tsx`: displays order history in an overlay.
+- `frontend/src/services/apiClient.ts`: attaches the JWT to requests.
 
 ### Backend
 
-- `backend/routes/orders.py`: API danh sách và chi tiết theo user.
-- `backend/auth.py`: xác thực JWT trước khi đọc đơn.
-- `backend/schema.sql`: bảng `orders`, `order_items`, `payments`.
-- `backend/tests/test_orders_api.py`: kiểm thử phân trang, ownership và dữ liệu snapshot.
+- `backend/routes/orders.py`: APIs for each user's order list and details.
+- `backend/auth.py`: validates JWTs before reading orders.
+- `backend/schema.sql`: the `orders`, `order_items`, and `payments` tables.
+- `backend/tests/test_orders_api.py`: tests pagination, ownership, and snapshot data.
 
-## 3. API chính
+## 3. Main APIs
 
-- `GET /api/orders?page=1&page_size=6`: lấy danh sách đơn của user.
-- `GET /api/orders/{id}`: lấy chi tiết một đơn của user.
-- Hai API đều yêu cầu Bearer token.
-- Đơn không thuộc user hiện tại được trả về như không tồn tại.
+- `GET /api/orders?page=1&page_size=6`: retrieves the user's order list.
+- `GET /api/orders/{id}`: retrieves the details of one of the user's orders.
+- Both APIs require a Bearer token.
+- Orders that do not belong to the current user are treated as nonexistent.
 
-## 4. Flow danh sách đơn
-
-```mermaid
-flowchart LR
-    A[Mở Account menu] --> B[Chọn My Orders]
-    B --> C[OrderHistory mở Overlay]
-    C --> D[GET /api/orders với JWT]
-    D --> E[Backend lấy user từ token]
-    E --> F[Query orders theo user_id]
-    F --> G[Trả 6 đơn mới nhất và total]
-    G --> H[Hiển thị danh sách và phân trang]
-```
-
-## 5. Flow xem chi tiết
+## 4. Order List Flow
 
 ```mermaid
 flowchart LR
-    A[Nhấn View details] --> B[GET /api/orders/id]
-    B --> C[Backend kiểm tra order_id và user_id]
-    C --> D{Đúng chủ sở hữu?}
-    D -- Không --> E[Trả 404]
-    D -- Có --> F[Đọc order payment và order_items]
-    F --> G[Hiển thị liên hệ giao nhận sản phẩm và tổng tiền]
+    A[Open the Account menu] --> B[Select My Orders]
+    B --> C[OrderHistory opens Overlay]
+    C --> D[GET /api/orders with JWT]
+    D --> E[Backend retrieves the user from the token]
+    E --> F[Query orders by user_id]
+    F --> G[Return the 6 most recent orders and total count]
+    G --> H[Display the list and pagination]
 ```
 
-## 6. Trạng thái giao diện
+## 5. Order Detail Flow
 
-- Loading: thông báo đang tải đơn.
-- Empty: thông báo chưa có đơn sau checkout.
-- Error: hiển thị lỗi và nút Retry.
-- Detail: có nút quay lại danh sách đơn.
-- Request đang chạy bị hủy khi đổi trang, đổi đơn hoặc đóng overlay.
+```mermaid
+flowchart LR
+    A[Click View details] --> B[GET /api/orders/id]
+    B --> C[Backend checks order_id and user_id]
+    C --> D{Correct owner?}
+    D -- No --> E[Return 404]
+    D -- Yes --> F[Read the order payment and order_items]
+    F --> G[Display contact delivery products and totals]
+```
 
-## 7. Điểm nhấn khi thuyết trình
+## 6. UI States
 
-- Ownership được kiểm tra ở câu SQL bằng cả `order_id` và `user_id`.
-- Một tài khoản không thể xem đơn của tài khoản khác bằng cách đổi URL ID.
-- Snapshot giữ đúng tên, ảnh và giá tại thời điểm mua.
-- Danh sách chỉ lấy dữ liệu tóm tắt; chi tiết chỉ tải khi người dùng yêu cầu.
-- Chức năng hiện chỉ xem trạng thái, chưa có tracking, hủy đơn hoặc xác nhận thanh toán.
+- Loading: displays a message indicating that orders are loading.
+- Empty: displays a message when no orders have been created through checkout yet.
+- Error: displays the error and a Retry button.
+- Detail: includes a button to return to the order list.
+- In-flight requests are canceled when changing pages, switching orders, or closing the overlay.
 
-## 8. Kịch bản demo ngắn
+## 7. Presentation Highlights
 
-- Đăng nhập tài khoản đã có đơn và mở Account > My Orders.
-- Chuyển trang nếu có nhiều hơn 6 đơn.
-- Mở một đơn để xem sản phẩm, giao nhận và thanh toán.
-- Đăng nhập tài khoản khác để chứng minh dữ liệu được tách theo user.
+- Ownership is checked in the SQL query using both `order_id` and `user_id`.
+- An account cannot view another account's orders by changing the ID in the URL.
+- Snapshots preserve the product name, image, and price at the time of purchase.
+- The list retrieves only summary data; details are loaded only when requested by the user.
+- The feature currently displays status only; tracking, order cancellation, and payment confirmation are not yet available.
 
+## 8. Short Demo Scenario
+
+- Log in to an account with existing orders and open Account > My Orders.
+- Change pages if there are more than 6 orders.
+- Open an order to view its products, delivery details, and payment information.
+- Log in to another account to demonstrate that data is separated by user.
