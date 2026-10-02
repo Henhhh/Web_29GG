@@ -1,93 +1,92 @@
-# 04 - Checkout và tạo đơn
+﻿# 04 - Checkout and Order Creation
 
-## 1. Giới thiệu
+## 1. Introduction
 
-- Mục tiêu: chuyển giỏ hàng thành đơn đã lưu trong database.
-- Người dùng chọn giao tận nơi hoặc nhận tại cửa hàng.
-- Hỗ trợ ba lựa chọn thanh toán: Card, QR Banking và Cash.
-- Thanh toán hiện là mô phỏng; order và payment được tạo với trạng thái `pending`.
+- Goal: convert the cart into an order saved in the database.
+- Users choose home delivery or store pickup.
+- Three payment options are supported: Card, QR Banking, and Cash.
+- Payments are currently simulated; orders and payments are created with the `pending` status.
 
-## 2. File/source code liên quan
+## 2. Related Files and Source Code
 
 ### Frontend
 
-- `frontend/src/App.tsx`: chuyển từ CartDrawer sang CheckoutModal.
-- `frontend/src/features/checkout/components/CheckoutModal.tsx`: giữ form và gửi đơn.
-- `ContactForm.tsx`: họ tên, email và điện thoại.
-- `DeliveryOptions.tsx`, `ShippingAddressForm.tsx`: hình thức và địa chỉ giao nhận.
-- `PaymentForm.tsx`: Card, QR Banking hoặc Cash.
-- `OrderSummary.tsx`, `PackageInfo.tsx`: tóm tắt hàng, phí và kiện hàng.
-- `OrderSuccess.tsx`: hiển thị mã đơn sau khi thành công.
-- `models/checkoutModel.ts`: state mặc định, validation, phí giao hàng và tổng tiền.
-- `ordersApi.ts`: gửi request tạo order.
-- `data/vietnamDivisions.ts`: tỉnh/thành và phường/xã cho form.
+- `frontend/src/App.tsx`: transitions from CartDrawer to CheckoutModal.
+- `frontend/src/features/checkout/components/CheckoutModal.tsx`: manages the form and submits the order.
+- `ContactForm.tsx`: full name, email, and phone number.
+- `DeliveryOptions.tsx`, `ShippingAddressForm.tsx`: delivery options and address.
+- `PaymentForm.tsx`: Card, QR Banking, or Cash.
+- `OrderSummary.tsx`, `PackageInfo.tsx`: summaries of items, fees, and package information.
+- `OrderSuccess.tsx`: displays the order code after successful checkout.
+- `models/checkoutModel.ts`: default state, validation, shipping fees, and totals.
+- `ordersApi.ts`: sends order creation requests.
+- `data/vietnamDivisions.ts`: provinces/cities and wards/communes for the form.
 
 ### Backend
 
-- `backend/routes/orders.py`: validate và tạo order bằng transaction.
-- `backend/routes/cart.py`: cung cấp danh sách pickup store.
-- `backend/data/vietnam_divisions.json`: kiểm tra mã địa chỉ phía server.
-- `backend/data/pickup_stores.json`: dữ liệu cửa hàng nhận hàng.
-- `backend/schema.sql`: bảng `orders`, `order_items`, `payments`.
-- `backend/tests/test_orders_api.py`, `test_checkout_schema.py`: kiểm thử transaction và ràng buộc dữ liệu.
+- `backend/routes/orders.py`: validates and creates orders within a transaction.
+- `backend/routes/cart.py`: provides the pickup store list.
+- `backend/data/vietnam_divisions.json`: validates address codes on the server.
+- `backend/data/pickup_stores.json`: pickup store data.
+- `backend/schema.sql`: the `orders`, `order_items`, and `payments` tables.
+- `backend/tests/test_orders_api.py`, `test_checkout_schema.py`: tests transactions and data constraints.
 
-## 3. API chính
+## 3. Main APIs
 
-- `GET /api/pickup-stores`: lấy cửa hàng đang hoạt động.
-- `POST /api/orders`: tạo đơn từ giỏ của user hiện tại.
-- Frontend chỉ gửi thông tin liên hệ, giao nhận và phương thức thanh toán.
-- Frontend không gửi subtotal, shipping fee hoặc total để backend tự tính lại.
+- `GET /api/pickup-stores`: retrieves active stores.
+- `POST /api/orders`: creates an order from the current user's cart.
+- The frontend sends only contact information, delivery details, and the payment method.
+- The frontend does not send the subtotal, shipping fee, or total; the backend calculates them independently.
 
-## 4. Flow nhập thông tin checkout
+## 4. Checkout Information Flow
 
 ```mermaid
 flowchart LR
-    A[Mở Checkout] --> B[Điền thông tin liên hệ]
-    B --> C{Hình thức nhận hàng}
-    C -- Ship --> D[Chọn tỉnh phường địa chỉ và gói giao]
-    C -- Pickup --> E[Chọn cửa hàng]
-    D --> F[Chọn phương thức thanh toán]
+    A[Open Checkout] --> B[Enter contact information]
+    B --> C{Delivery option}
+    C -- Ship --> D[Select province ward address and shipping method]
+    C -- Pickup --> E[Select a store]
+    D --> F[Select a payment method]
     E --> F
     F --> G[Frontend validation]
     G --> H[POST /api/orders]
 ```
 
-## 5. Flow transaction tạo đơn
+## 5. Order Creation Transaction Flow
 
 ```mermaid
 flowchart LR
-    A[Backend nhận request] --> B[Validate contact và delivery]
+    A[Backend receives the request] --> B[Validate contact and delivery details]
     B --> C[BEGIN IMMEDIATE]
-    C --> D[Đọc giỏ và kiểm tra tồn kho]
-    D --> E[Tính subtotal phí ship và total]
-    E --> F[Tạo orders và order_items snapshot]
-    F --> G[Trừ tồn kho]
-    G --> H[Tạo payment pending]
-    H --> I[Xóa cart_items]
-    I --> J[COMMIT và trả mã đơn]
-    D -- Có lỗi --> K[ROLLBACK toàn bộ]
+    C --> D[Read the cart and check stock]
+    D --> E[Calculate subtotal shipping fee and total]
+    E --> F[Create orders and order_items snapshots]
+    F --> G[Deduct stock]
+    G --> H[Create a pending payment]
+    H --> I[Delete cart_items]
+    I --> J[COMMIT and return the order code]
+    D -- Error --> K[ROLLBACK everything]
 ```
 
-## 6. Quy tắc quan trọng
+## 6. Important Rules
 
-- Ship yêu cầu tỉnh, phường, địa chỉ và shipping method hợp lệ.
-- Pickup yêu cầu cửa hàng còn active và phí ship bằng 0.
-- Standard miễn phí; Express và Overnight có phí do backend quy định.
-- Card chỉ được kiểm tra mô phỏng phía frontend; số thẻ không gửi và không lưu.
-- Snapshot tên, ảnh và giá sản phẩm giúp đơn cũ không đổi khi catalog thay đổi.
-- Transaction bảo đảm không có trạng thái trừ kho nhưng chưa tạo đơn hoặc ngược lại.
+- Ship requires a valid province, ward, address, and shipping method.
+- Pickup requires an active store and has a shipping fee of 0.
+- Standard shipping is free; Express and Overnight fees are defined by the backend.
+- Card validation is simulated on the frontend only; card numbers are neither sent nor stored.
+- Snapshots of product names, images, and prices keep past orders unchanged when the catalog changes.
+- The transaction ensures that stock deductions and order creation succeed or fail together.
 
-## 7. Điểm nhấn khi thuyết trình
+## 7. Presentation Highlights
 
-- Backend là nguồn quyết định giá, phí và tồn kho cuối cùng.
-- Checkout là thao tác nguyên tử: hoặc hoàn thành tất cả, hoặc rollback tất cả.
-- Hai nhánh Ship/Pickup dùng dữ liệu khác nhau nhưng cùng tạo một cấu trúc order.
-- Sau khi thành công, frontend xóa giỏ và giữ biên nhận để người dùng xác nhận.
+- The backend determines the final prices, fees, and stock levels.
+- Checkout is atomic: either all operations complete or all changes are rolled back.
+- The Ship and Pickup branches use different data but create the same order structure.
+- After success, the frontend clears the cart and retains the receipt for the user to review.
 
-## 8. Kịch bản demo ngắn
+## 8. Short Demo Scenario
 
-- Mở checkout từ giỏ có sản phẩm.
-- Chuyển giữa Ship và Pickup để xem form thay đổi.
-- Thử thiếu trường bắt buộc để xem validation.
-- Chọn Cash để tạo đơn nhanh, sau đó trình bày mã đơn và tổng tiền.
-
+- Open checkout from a cart containing products.
+- Switch between Ship and Pickup to show how the form changes.
+- Leave required fields empty to demonstrate validation.
+- Select Cash to create an order quickly, then show the order code and total.

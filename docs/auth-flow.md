@@ -1,99 +1,99 @@
-# 01 - Tài khoản người dùng
+﻿# 01 - User Accounts
 
-## 1. Giới thiệu
+## 1. Introduction
 
-- Mục tiêu: cho phép người dùng đăng ký, đăng nhập, cập nhật hồ sơ và đăng xuất.
-- Tài khoản là điều kiện để sử dụng giỏ hàng, checkout và xem lịch sử đơn hàng.
-- Backend dùng Flask, SQLite và JWT; mật khẩu chỉ lưu dưới dạng hash.
-- JWT có thời hạn 2 giờ và được frontend giữ trong bộ nhớ, không lưu vào `localStorage`.
+- Goal: allow users to register, log in, update their profiles, and log out.
+- An account is required to use the cart, check out, and view order history.
+- The backend uses Flask, SQLite, and JWT; passwords are stored only as hashes.
+- JWTs expire after 2 hours and are kept in frontend memory, rather than in `localStorage`.
 
-## 2. File/source code liên quan
+## 2. Related Files and Source Code
 
 ### Frontend
 
-- `frontend/src/App.tsx`: giữ trạng thái mở modal và điều phối đăng nhập/đăng ký.
-- `frontend/src/components/layout/Header.tsx`: hiển thị nút Login, Register hoặc menu tài khoản.
-- `frontend/src/features/auth/components/AuthModal.tsx`: chuyển giữa hai tab Login và Create account.
-- `frontend/src/features/auth/components/LoginForm.tsx`: nhập và kiểm tra email, mật khẩu.
-- `frontend/src/features/auth/components/RegisterForm.tsx`: nhập username, email, mật khẩu và xác nhận mật khẩu.
-- `frontend/src/features/auth/components/AccountMenu.tsx`: hiển thị hồ sơ, My Orders và Logout.
-- `frontend/src/features/auth/components/ProfileForm.tsx`: cập nhật họ tên và số điện thoại.
-- `frontend/src/features/auth/useAuth.ts`: quản lý user, token, đăng nhập và đăng xuất.
-- `frontend/src/features/auth/authApi.ts`: gọi API đăng ký, đăng nhập và hồ sơ.
-- `frontend/src/services/apiClient.ts`: gửi HTTP request và gắn Bearer token.
-- `frontend/src/services/tokenStore.ts`: giữ token trong bộ nhớ và thông báo khi phiên kết thúc.
+- `frontend/src/App.tsx`: manages modal visibility and coordinates login and registration.
+- `frontend/src/components/layout/Header.tsx`: displays Login, Register, or the account menu.
+- `frontend/src/features/auth/components/AuthModal.tsx`: switches between Login and Create account tabs.
+- `frontend/src/features/auth/components/LoginForm.tsx`: collects and validates email and password.
+- `frontend/src/features/auth/components/RegisterForm.tsx`: collects username, email, password, and password confirmation.
+- `frontend/src/features/auth/components/AccountMenu.tsx`: displays the profile, My Orders, and Logout.
+- `frontend/src/features/auth/components/ProfileForm.tsx`: updates the full name and phone number.
+- `frontend/src/features/auth/useAuth.ts`: manages the user, token, login, and logout.
+- `frontend/src/features/auth/authApi.ts`: calls registration, login, and profile APIs.
+- `frontend/src/services/apiClient.ts`: sends HTTP requests and attaches the Bearer token.
+- `frontend/src/services/tokenStore.ts`: keeps the token in memory and notifies listeners when the session ends.
 
 ### Backend
 
-- `backend/routes/auth.py`: API register, login, xem và sửa hồ sơ.
-- `backend/auth.py`: tạo JWT và xác thực Bearer token.
-- `backend/validation.py`: kiểm tra dữ liệu tài khoản.
-- `backend/db.py` và `backend/schema.sql`: kết nối SQLite và bảng `users`, `login_limits`.
-- `backend/tests/test_auth.py`: kiểm thử đăng ký, đăng nhập, JWT và phân quyền.
+- `backend/routes/auth.py`: APIs for registration, login, and viewing and editing profiles.
+- `backend/auth.py`: creates JWTs and validates Bearer tokens.
+- `backend/validation.py`: validates account data.
+- `backend/db.py` and `backend/schema.sql`: SQLite connection and the `users` and `login_limits` tables.
+- `backend/tests/test_auth.py`: tests registration, login, JWTs, and authorization.
 
-## 3. API chính
+## 3. Main APIs
 
-- `POST /api/auth/register`: tạo tài khoản mới.
-- `POST /api/auth/login`: kiểm tra mật khẩu và trả JWT cùng thông tin user.
-- `GET /api/me`: lấy tài khoản hiện tại từ JWT.
-- `PATCH /api/me`: cập nhật họ tên và số điện thoại.
-- Route cần đăng nhập dùng decorator `@require_user`.
+- `POST /api/auth/register`: creates a new account.
+- `POST /api/auth/login`: verifies the password and returns a JWT with user information.
+- `GET /api/me`: retrieves the current account using the JWT.
+- `PATCH /api/me`: updates the full name and phone number.
+- Routes requiring login use the `@require_user` decorator.
 
-## 4. Flow đăng ký
+## 4. Registration Flow
 
 ```mermaid
 flowchart LR
-    A[Người dùng mở Register] --> B[RegisterForm kiểm tra dữ liệu]
+    A[User opens Register] --> B[RegisterForm validates input]
     B --> C[authApi POST /api/auth/register]
     C --> D[Backend validation]
-    D --> E{Email hoặc username đã tồn tại?}
-    E -- Có --> F[Trả lỗi 409 về đúng field]
-    E -- Không --> G[Hash mật khẩu]
-    G --> H[Lưu user vào SQLite]
-    H --> I[Frontend chuyển sang tab Login]
+    D --> E{Email or username already exists?}
+    E -- Yes --> F[Return a 409 error for the relevant field]
+    E -- No --> G[Hash the password]
+    G --> H[Save the user to SQLite]
+    H --> I[Frontend switches to the Login tab]
 ```
 
-## 5. Flow đăng nhập
+## 5. Login Flow
 
 ```mermaid
 flowchart LR
-    A[Người dùng nhập email và password] --> B[LoginForm kiểm tra dữ liệu]
+    A[User enters email and password] --> B[LoginForm validates input]
     B --> C[authApi POST /api/auth/login]
-    C --> D[Backend kiểm tra rate limit]
-    D --> E[So sánh password hash]
-    E --> F{Thông tin hợp lệ?}
-    F -- Không --> G[Trả lỗi 401]
-    F -- Có --> H[Tạo JWT thời hạn 2 giờ]
-    H --> I[tokenStore giữ token trong bộ nhớ]
-    I --> J[useAuth lưu user]
-    J --> K[Header hiển thị Account menu]
+    C --> D[Backend checks the rate limit]
+    D --> E[Compare the password hash]
+    E --> F{Valid credentials?}
+    F -- No --> G[Return a 401 error]
+    F -- Yes --> H[Create a JWT valid for 2 hours]
+    H --> I[tokenStore keeps the token in memory]
+    I --> J[useAuth stores the user]
+    J --> K[Header displays the Account menu]
 ```
 
-## 6. Flow xác thực API và đăng xuất
+## 6. API Authentication and Logout Flow
 
 ```mermaid
 flowchart LR
-    A[Frontend gọi API cần đăng nhập] --> B[apiClient gắn Authorization Bearer JWT]
-    B --> C[require_user giải mã JWT]
-    C --> D{Token và user hợp lệ?}
-    D -- Không --> E[401 và xóa phiên frontend]
-    D -- Có --> F[Gắn user vào flask.g]
-    F --> G[Route xử lý dữ liệu của user]
-    H[Người dùng chọn Logout] --> I[Xóa token và user khỏi bộ nhớ]
-    I --> J[Xóa giỏ đang hiển thị và đóng panel]
+    A[Frontend calls an API requiring login] --> B[apiClient attaches Authorization Bearer JWT]
+    B --> C[require_user decodes the JWT]
+    C --> D{Valid token and user?}
+    D -- No --> E[Return 401 and clear the frontend session]
+    D -- Yes --> F[Attach the user to flask.g]
+    F --> G[Route processes the user's data]
+    H[User selects Logout] --> I[Remove the token and user from memory]
+    I --> J[Clear the displayed cart and close the panel]
 ```
 
-## 7. Điểm nhấn khi thuyết trình
+## 7. Presentation Highlights
 
-- Frontend chỉ quản lý giao diện và phiên hiện tại; backend mới là nơi xác thực thật.
-- Mật khẩu không được lưu trực tiếp, chỉ lưu `password_hash`.
-- JWT bảo vệ các API cá nhân và xác định đúng người sở hữu dữ liệu.
-- Rate limit giảm thử mật khẩu liên tục theo email và IP.
-- Đăng xuất phía frontend xóa token ngay; token bị sao chép trước đó chỉ hết hiệu lực khi hết hạn.
+- The frontend manages the interface and current session; the backend performs authentication.
+- Passwords are never stored directly; only `password_hash` is stored.
+- JWTs protect personal APIs and identify the owner of the data.
+- Rate limiting reduces repeated password attempts by email and IP address.
+- Frontend logout removes the token immediately; a previously copied token remains valid until it expires.
 
-## 8. Kịch bản demo ngắn
+## 8. Short Demo Scenario
 
-- Mở Register, thử dữ liệu thiếu để xem validation.
-- Tạo tài khoản, sau đó đăng nhập bằng tài khoản vừa tạo.
-- Mở Account menu và cập nhật họ tên hoặc số điện thoại.
-- Đăng xuất và thử mở chức năng yêu cầu tài khoản.
+- Open Register and leave fields empty to demonstrate validation.
+- Create an account, then log in with the new account.
+- Open the Account menu and update the full name or phone number.
+- Log out and try to access a feature requiring an account.
